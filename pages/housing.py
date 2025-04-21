@@ -2,7 +2,8 @@ from dash import dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
 import pandas as pd
 import os
-from pages.vis.housing_vis import housing_sankey, income_affordability_sankey, housing_vs_budget_trend
+from components import navbar
+from pages.vis.housing_vis import housing_sankey, income_affordability_sankey, housing_vs_budget_trend, housing_affordability_delta_trend
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -16,7 +17,9 @@ years = sorted(df['Year'].str[:4].astype(int).unique())
 
 # Layout for the housing page
 layout = dbc.Container([
-    html.H3("Housing Cost Sankey Diagram"),
+    navbar.create_navbar(),
+
+    html.H4("Housing Cost Sankey Diagram"),
     dbc.Row([
         dbc.Col([
             dcc.Graph(id='sankey-graph')
@@ -40,11 +43,21 @@ layout = dbc.Container([
             dcc.Graph(id='income-sankey-graph')
         ], width=6),
         dbc.Col([
-            dcc.Graph(
-                id='housing-budget-trend',
-                figure=housing_vs_budget_trend()
-            )
-        ], width=6)
+            dbc.Tabs([
+                dbc.Tab(
+                    dcc.Graph(
+                        figure=housing_vs_budget_trend()
+                    ),
+                    label="Housing Budget Trends"
+                ),
+                dbc.Tab(
+                    dcc.Graph(
+                        figure=housing_affordability_delta_trend()
+                    ),
+                    label="Housing Budget Affordability Delta"
+                )
+            ])
+        ], width=6, className="mt-4"),
     ]),
 ], fluid=True)
 

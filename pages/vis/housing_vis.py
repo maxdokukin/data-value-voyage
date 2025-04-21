@@ -92,7 +92,7 @@ def housing_sankey(selected_year):
     )])
 
     fig.update_layout(
-        title_text=f"{selected_year} Home: {round(price):,.0f} @ {round(rate * 100, 1)}%\nTotal 30-Year Cost: {round(total_cost):,.0f}",
+        title_text=f"{selected_year} Home: ${round(price):,.0f} @ {round(rate * 100, 1)}%\nTotal 30-Year Cost: ${round(total_cost):,.0f}",
         font_size=14
     )
 
@@ -165,7 +165,7 @@ def income_affordability_sankey(selected_year):
     )])
 
     fig.update_layout(
-        title_text=f"{selected_year} Annual Salary: {round(annual_income):,.0f} — Monthly Salary: {round(monthly_income):,.0f} — Income Sankey Diagram",
+        title_text=f"{selected_year} Annual Salary: {round(annual_income):,.0f} — Monthly Salary: {round(monthly_income):,.0f}",
         font_size=14
     )
 
@@ -198,7 +198,7 @@ def housing_vs_budget_trend():
         x=df['Year'],
         y=df['Budget (30%)'],
         mode='lines',
-        name='Monthly Housing Budget (30%)',
+        name='Housing Budget',
         line=dict(color='green'),
         fill=None
     ))
@@ -207,14 +207,14 @@ def housing_vs_budget_trend():
         x=df['Year'],
         y=df['Total Monthly Cost'],
         mode='lines',
-        name='Mortgage + Tax + Insurance',
+        name='MTI',
         line=dict(color='red'),
         fill='tonexty',
         fillcolor='rgba(255, 99, 132, 0.2)'
     ))
 
     fig.update_layout(
-        title="Housing Budget vs. Actual Cost Trend",
+        title="Mortgage + Taxes + Insurance vs. Housing Budget (30%)",
         xaxis_title="Year",
         xaxis=dict(
             tickangle=50
@@ -226,3 +226,44 @@ def housing_vs_budget_trend():
 
     return fig
 
+def housing_affordability_delta_trend():
+    csv_path = os.path.join(csv_dir, 'analysis.csv')
+    df = pd.read_csv(csv_path)
+
+    df = df[df['Year'].str.endswith('-07')]
+    df['Year'] = df['Year'].str[:4]
+
+    df['Median Income'] = df['Median Income'].astype(float)
+    df['Monthly Income'] = df['Median Income'] / 12
+    df['Budget (30%)'] = df['Monthly Income'] * 0.30
+
+    df['Median Home Price'] = df['Median Home Price'].astype(float)
+    df['Interest Rate'] = df['Interest Rate'] / 100
+    df['Mortgage'] = df['Median Home Price'] * 0.8
+    df['Monthly Payment'] = (df['Mortgage'] * df['Interest Rate'] / 12) / (1 - (1 + df['Interest Rate'] / 12) ** -360)
+
+    df['Total Monthly Cost'] = df['Monthly Payment'] + df['Property Tax'] + df['Home Insurance']
+
+    df['Affordability Delta'] = df['Budget (30%)'] - df['Total Monthly Cost']
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(
+        x=df['Year'],
+        y=df['Affordability Delta'],
+        mode='lines+markers',
+        name='Housing Affordability Delta',
+        line=dict(color='orange')
+    ))
+
+    fig.update_layout(
+        title="Housing Affordability Delta Over Time",
+        xaxis_title="Year",
+        xaxis=dict(
+            tickangle=50
+        ),
+        yaxis_title="Budget - Actual Cost",
+        font=dict(size=14),
+        hovermode='x unified'
+    )
+
+    return fig

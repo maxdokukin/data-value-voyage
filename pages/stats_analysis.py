@@ -312,7 +312,7 @@ layout = dbc.Container(fluid=True, children=[
     dbc.Col([
         html.H3("Mean Income Distribution by Year and Group"),
         dcc.Graph(id="income-distribution-pyramid", figure=build_income_distribution_pyramid())
-    ], width=12)
+    ], width=7)
 ], className="mb-5")
 ])
 
