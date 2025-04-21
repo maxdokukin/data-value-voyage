@@ -28,8 +28,8 @@ def build_income_distribution_pyramid():
 
     for quintile, color in quintiles:
         fig.add_trace(go.Bar(
-            y=df["Year"].astype(str),
-            x=df[quintile],
+            y=df["Year"].astype(str).tolist(),
+            x=df[quintile].astype(float).tolist(),
             name=quintile,
             orientation='h',
             marker=dict(color=color)
@@ -44,7 +44,7 @@ def build_income_distribution_pyramid():
         height=900,
         margin=dict(l=80, r=20, t=60, b=60),
         legend=dict(title="Income Groups"),
-        hovermode="x unified",
+        hovermode="y unified",
     )
 
     return fig

@@ -195,8 +195,8 @@ def housing_vs_budget_trend():
     # Plotly figure
     fig = go.Figure()
     fig.add_trace(go.Scatter(
-        x=df['Year'],
-        y=df['Budget (30%)'],
+        x=df['Year'].astype(str).tolist(),
+        y=df['Budget (30%)'].astype(float).tolist(),
         mode='lines',
         name='Housing Budget',
         line=dict(color='green'),
@@ -204,8 +204,8 @@ def housing_vs_budget_trend():
     ))
 
     fig.add_trace(go.Scatter(
-        x=df['Year'],
-        y=df['Total Monthly Cost'],
+        x=df['Year'].astype(str).tolist(),
+        y=df['Total Monthly Cost'].astype(float).tolist(),
         mode='lines',
         name='MTI',
         line=dict(color='red'),
@@ -248,8 +248,8 @@ def housing_affordability_delta_trend():
 
     fig = go.Figure()
     fig.add_trace(go.Scatter(
-        x=df['Year'],
-        y=df['Affordability Delta'],
+        x=df['Year'].astype(str).tolist(),
+        y=df['Affordability Delta'].astype(float).tolist(),
         mode='lines+markers',
         name='Housing Affordability Delta',
         line=dict(color='orange')

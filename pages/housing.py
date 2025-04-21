@@ -59,6 +59,53 @@ layout = dbc.Container([
             ])
         ], width=6, className="mt-4"),
     ]),
+    dbc.Row([
+        dbc.Col([
+            html.A(
+                href="https://www.ocregister.com/2015/08/30/oc-faces-bifurcated-threat-inequality-and-insufficient-housing/",
+                target="_blank",
+                children=html.Img(
+                    src="/static/assets/housing_inequality.png",
+                    style={"width": "100%", "display": "block", "margin": "2 auto"}
+                )
+            ),
+            html.P([
+                "Source: ",
+                html.A(
+                    "The Orange County Register",
+                    href="https://www.ocregister.com/2015/08/30/oc-faces-bifurcated-threat-inequality-and-insufficient-housing/",
+                    target="_blank"
+                )
+            ]),
+        ], width=3),
+        dbc.Col([
+            html.H3("Structural Barriers to Homeownership and Wealth Accumulation"),
+            html.H4("The 20% Down Payment Threshold"),
+            html.P("A 20% down payment is conventionally required to avoid Private Mortgage Insurance (PMI), an additional cost that disproportionately burdens lower-income buyers. This upfront financial hurdle exacerbates wealth stratification, as those without intergenerational wealth or substantial savings are effectively excluded from the market or forced into costlier financing structures."),
+            html.H4("The True Cost of Ownership and Intergenerational Disparities"),
+            html.P("The Sankey diagram illustrates how interest payments, property taxes, and insurance compound over a 30-year mortgage, significantly inflating the total expenditure. This dynamic entrenches intergenerational inequality, as households that purchased homes in earlier decades (when prices were lower relative to income) benefit from equity accumulation, while newer entrants face diminished purchasing power due to stagnant wage growth and rising housing costs."),
+            html.H4("Housing Budget Affordability Delta: A Metric of Economic Polarization"),
+            html.P("The delta between monthly housing costs (mortgage + taxes + insurance) and the recommended 30% housing budget serves as a stark indicator of affordability erosion. As this gap widens, middle- and working-class households are forced to allocate a larger share of income to housing, reducing disposable income for savings, education, or investment—key drivers of upward mobility."),
+        ], width=6, className="mt-4"),
+        dbc.Col([
+            html.A(
+                href="https://www.seattletimes.com/opinion/maybe-income-inequality-is-all-about-housing/",
+                target="_blank",
+                children=html.Img(
+                    src="/static/assets/housing_rising_cost.png",
+                    style={"width": "70%", "display": "block", "margin": "2 auto"}
+                )
+            ),
+            html.P([
+                "Source: ",
+                html.A(
+                    "The Seattle Times",
+                    href="https://www.seattletimes.com/opinion/maybe-income-inequality-is-all-about-housing/",
+                    target="_blank"
+                )
+            ]),
+        ], width=3)
+    ])
 ], fluid=True)
 
 # Callback to update the Sankey graph based on selected year

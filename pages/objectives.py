@@ -58,7 +58,7 @@ layout = dbc.Container(
                                         "make up the bulk of the card's content.",
                                         className="card-text",
                                     ),
-                                    dbc.Button("Go somewhere", color="success"),
+                                    dbc.Button("Go somewhere", color="success", href="/housing"),
                                 ]
                             ),
                         ], color = "success", outline = True
