@@ -309,11 +309,44 @@ layout = dbc.Container(fluid=True, children=[
         ], width=6)
     ], className="mb-5"),
     dbc.Row([
-    dbc.Col([
-        html.H3("Mean Income Distribution by Year and Group"),
-        dcc.Graph(id="income-distribution-pyramid", figure=build_income_distribution_pyramid())
-    ], width=7)
-], className="mb-5")
+        dbc.Col([
+            html.H3("Why the Gamma Distribution is a Fair Choice to Measure Income Distribution"),
+            html.P("    ✤  We understood from our research that the Income Distribution is always skewed like a Gamma Distribution. This has been consistent throughout history. We wanted to find out just how skewed and how spread the data should be using a bootstrap resampling method. As a result, we chose our Gamma parameters: Alpha and Beta, each designated with special weights according to their relevance."),
+            html.P("    ✤  The Gamma distribution is a continuous probability distribution that is often used to model skewed data, such as income distributions. It is defined by two parameters: shape (α) and scale (β). The shape parameter determines the skewness of the distribution, while the scale parameter determines the spread of the distribution. The Gamma distribution is flexible and can take on various shapes depending on the values of α and β, making it suitable for modeling income distributions that are typically right-skewed."),
+            html.P("    ✤  We found data from the census representing the mean income for each quintile group. We then used this data to create a pyramid chart that shows the distribution of income across different quintiles. The pyramid chart is a useful way to visualize the distribution of income and to see how it has changed over time."),
+        ], width=6),
+        dbc.Col([
+            dbc.Col([
+                html.A(
+                    href="https://www.ft.com/content/98ce14ee-99a6-11e5-95c7-d47aa298f769#axzz3tsfi86Qz",
+                    target="_blank",
+                    children=html.Img(
+                        src="/static/assets/income_distribution.gif",
+                        # style={"width": "100%", "display": "block", "margin": "2rem auto"}
+                    )
+                ),
+                html.P([
+                    "Source: ",
+                    html.A(
+                        "Financial Times",
+                        href="https://www.ft.com/content/98ce14ee-99a6-11e5-95c7-d47aa298f769#axzz3tsfi86Qz",
+                        target="_blank"
+                    )
+                ]),
+            ], width=6),
+        ])
+    ], className="mb-4"),
+    dbc.Row([
+        dbc.Col([
+            html.H3("Income Distribution Pyramid"),
+            dcc.Graph(id="income-distribution-pyramid", figure=build_income_distribution_pyramid())
+        ], width=7),
+        dbc.Col([
+            html.H3("← How to Interpret the Income Distribution Pyramid"),
+            html.P("Imagine we have the income distribution for all incomes from every year in our dataset, and we devided the entire distribution into 5 pieces each representing 1/5 of the total population. For each quintile group, the value represented by each bar is the mean income for that group. The pyramid chart shows how the distribution of income has changed over time, as well as the top 5% of earners represented by the top bar."),
+            html.P("The data is sourced from the U.S. Census Bureau. More about the data can be found in our data page."),
+        ], width=5),
+    ], className="mb-5"),
 ])
 
 exprort_layout = layout
