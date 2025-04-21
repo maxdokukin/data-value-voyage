@@ -11,7 +11,7 @@ def create_navbar():
             dbc.NavItem(dbc.NavLink("Statistical Analysis", href="/stat_analysis")),
             dbc.DropdownMenu(
                 children = [
-                    dbc.DropdownMenuItem("Housing Visualization", href="/housing_visualization"),
+                    dbc.DropdownMenuItem("Housing Visualization", href="/housing"),
                     dbc.DropdownMenuItem("Pay - Productivity Gap", href="/pay_productivity_gap"),
                     dbc.DropdownMenuItem("Gini Testing with Variation", href="/gini_testing"),
                     dbc.DropdownMenuItem("Data", href="/data")

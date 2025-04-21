@@ -4,7 +4,7 @@ warnings.filterwarnings("ignore", category=UserWarning, module='pandas')
 from dash import Dash, dcc, html, Input, Output, callback, dash
 import dash_bootstrap_components as dbc
 from components import navbar
-from pages import landing, objectives, analysis, findings, stats_analysis
+from pages import landing, objectives, analysis, findings, stats_analysis, housing
 import os
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
@@ -32,8 +32,8 @@ def display_page(pathname):
         return findings.layout
     elif pathname == "/stat_analysis":
         return stats_analysis.layout
-    elif pathname == "/housing_visualization":
-        return html.Div()
+    elif pathname == "/housing":
+        return housing.layout
     else:
         return html.Div([
             html.H1("404: Page Not Found"),
