@@ -40,7 +40,7 @@ def housing_sankey(selected_year):
     ]
 
 
-    # Sankey flow definitions
+    # Sankey flow definitions DO NOT TOUCH
     source = [0,0,2,3,3,3,4,5,6,1]
     target = [1,2,3,4,5,6,7,7,7,7]
     value = [
