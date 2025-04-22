@@ -18,13 +18,14 @@ layout = html.Div([
     # Main container
     html.Div([
         # Slide 1 - Top Bar + Hero Section
+
         html.Div(className="section-slide", children=[
-            # Top Bar with Hamburger and Nav
-            html.Div(id="topBar", className="top-bar", children=[
-                html.Div(id="menuToggle", className="menu-toggle", n_clicks=0, children=[
+# Top Bar with Hamburger and Nav
+            html.Div(id="topBar", className="top-bar with-background", children=[
+                html.Div(id="menuToggle", className="menu-toggle active", n_clicks=0, children=[
                     html.Div(), html.Div(), html.Div()
                 ]),
-                html.Div(id="topNav", className="top-nav", children=[
+                html.Div(id="topNav", className="top-nav open", children=[
                     html.A('Objectives', href='/objectives'),
                     html.A('Methods', href='/stat_analysis'),
                     html.A('Major Findings', href='/findings'),

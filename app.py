@@ -50,9 +50,9 @@ def display_page(pathname):
 )
 def toggle_menu(n_clicks):
     if n_clicks % 2 == 1:
-        return "top-nav open", "top-bar with-background", "menu-toggle active"
-    else:
         return "top-nav", "top-bar", "menu-toggle"
+    else:
+        return "top-nav open", "top-bar with-background", "menu-toggle active"
 
 # Run the app
 if __name__ == '__main__':
