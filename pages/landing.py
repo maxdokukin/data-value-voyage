@@ -1,5 +1,6 @@
 from dash import html, dcc
 import os
+from components.topbar import get_topbar
 
 # Path to the external HTML file
 html_file_path = os.path.join(os.getcwd(), 'static', 'plotly', 'incomes.html')
@@ -13,26 +14,14 @@ layout = html.Div([
     # Link to CSS files in the static folder
     html.Link(rel='stylesheet', href='/static/css/global-styles.css'),
     html.Link(rel='stylesheet', href='/static/css/homepage-styles.css'),
-    html.Link(rel='stylesheet', href='/static/css/top-bar-styles.css'),
+    # html.Link(rel='stylesheet', href='/static/css/top-bar-styles.css'),
 
     # Main container
     html.Div([
         # Slide 1 - Top Bar + Hero Section
 
         html.Div(className="section-slide", children=[
-# Top Bar with Hamburger and Nav
-            html.Div(id="topBar", className="top-bar with-background", children=[
-                html.Div(id="menuToggle", className="menu-toggle active", n_clicks=0, children=[
-                    html.Div(), html.Div(), html.Div()
-                ]),
-                html.Div(id="topNav", className="top-nav open", children=[
-                    html.A('Objectives', href='/objectives'),
-                    html.A('Methods', href='/stat_analysis'),
-                    html.A('Major Findings', href='/findings'),
-                    html.A('Data', href='/data')
-                ])
-            ]),
-
+            get_topbar(),
             # Hero Section
             html.Div(className="hero", children=[
                 html.Div(className="overlay", children=[
