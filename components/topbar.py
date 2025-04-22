@@ -4,7 +4,7 @@ def get_topbar(show_home: bool = True, overlay: bool = True):
     kind = "fixed" if overlay else "static"
 
     if show_home:
-        home_option = html.A("🏠", href="/")
+        home_option = html.A("🏠︎", href="/", style={"fontSize": "24px"}) # 🏠
     else:
         home_option = None
 

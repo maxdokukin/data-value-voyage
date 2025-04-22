@@ -20,13 +20,21 @@ years = sorted(df['Year'].str[:4].astype(int).unique())
 layout = dbc.Container([
     get_topbar(overlay=False),
 
-    html.H4("Housing Cost Sankey Diagram"),
+    html.Link(rel="stylesheet", href="/static/css/methods-styles.css"),
+
+    html.H4("Housing Cost Sankey Diagram", className="mt-4"),
     dbc.Row([
         dbc.Col([
+            ],width=1),
+        dbc.Col([
             dcc.Graph(id='sankey-graph')
-        ])
+        ], width=10, className="mt-4"),
+        dbc.Col([
+            ],width=1),
     ]),
     dbc.Row([
+        dbc.Col([
+            ],width=1),
         dbc.Col([
             dcc.Slider(
                 id='year-slider',
@@ -37,7 +45,9 @@ layout = dbc.Container([
                 marks={str(year): str(year) for year in years[::5]},
                 tooltip={"placement": "bottom", "always_visible": True}
             )
-        ])
+        ], width=10, className="mt-4"),
+        dbc.Col([
+            ],width=1),
     ]),
     dbc.Row([
         dbc.Col([
@@ -46,16 +56,18 @@ layout = dbc.Container([
         dbc.Col([
             dbc.Tabs([
                 dbc.Tab(
-                    dcc.Graph(
-                        figure=housing_vs_budget_trend()
-                    ),
-                    label="Housing Budget Trends"
+                    children=[
+                        html.Div("Housing Budget Trends", style={"text-align": "center", "font-size": "16px", "color": "black"}),
+                        dcc.Graph(figure=housing_vs_budget_trend())
+                    ],
+                    tab_id="housing-budget-trends"
                 ),
                 dbc.Tab(
-                    dcc.Graph(
-                        figure=housing_affordability_delta_trend()
-                    ),
-                    label="Housing Budget Affordability Delta"
+                    children=[
+                        html.Div("Housing Budget Affordability Delta", style={"text-align": "center", "font-size": "16px", "color": "black"}),
+                        dcc.Graph(figure=housing_affordability_delta_trend())
+                    ],
+                    tab_id="housing-budget-affordability-delta"
                 )
             ])
         ], width=6, className="mt-4"),

@@ -190,23 +190,31 @@ layout = dbc.Container(fluid=True, children=[
 
     # Section: Header / Introduction
     dbc.Row([
-        dbc.Col(html.H2("Understanding Income Inequality Through Statistical Modeling"), width=12),
-        dbc.Col(html.P("""
-            This page summarizes the methodology and metrics used to quantify income inequality over time.
-            Using the Palma Ratio, Housing Affordability Delta, and the Productivity Gap, we normalized each metric and derived Alpha and Beta parameters
-            to simulate income distributions via a Gamma distribution. Gini coefficients and Lorenz curves offer visual and numeric validation of inequality over time.
-        """), width=12)
+        dbc.Col([
+            ],width=1),
+        dbc.Col(html.H2("Understanding Income Inequality Through Statistical Modeling"), width=11),
+        dbc.Col([
+            ],width=1),
+        dbc.Col(html.P("This page summarizes the methodology and metrics used to quantify income inequality over time. Using the Palma Ratio, Housing Affordability Delta, and the Productivity Gap, we normalized each metric and derived Alpha and Beta parameters to simulate income distributions via a Gamma distribution. Gini coefficients and Lorenz curves offer visual and numeric validation of inequality over time."), width=10),
+        dbc.Col([
+            ],width=1),
     ], className="my-4"),
     
     # Section: Lorenz Curve Interactive Plot
     dbc.Row([
         dbc.Col([
+            ],width=1),
+        dbc.Col([
             dcc.Graph(id="gini-trend-plot", figure=gini_trend_fig)
-        ], width=12)
+        ], width=10),
+        dbc.Col([
+            ],width=1),
     ]),
 
     # Section: Gini Coefficients Text + Visual Pair
     dbc.Row([
+        dbc.Col([
+            ],width=1),
         dbc.Col([
             html.H3("Interpreting Gini Coefficients"),
             html.P("""
@@ -228,7 +236,7 @@ layout = dbc.Container(fluid=True, children=[
             - $$\\beta$$ is the scale parameter  
             - $$\\Gamma(f;\\alpha,\\beta)$$ is the Gamma function
             """, mathjax=True)
-        ], width=6),
+        ], width=5),
         dbc.Col([
             html.H4("Lorenz Curve by Year"),
             dcc.Slider(
@@ -250,11 +258,15 @@ layout = dbc.Container(fluid=True, children=[
                 tooltip={"placement": "bottom", "always_visible": True}
             ),
             dcc.Graph(id="lorenz-curve-plot")
-        ], width=6),  # Added missing width parameter and comma
+        ], width=5),
+        dbc.Col([
+            ],width=1),
     ], className="mb-4"),
 
     # Section: Expressing Income Inequality
     dbc.Row([
+        dbc.Col([
+            ],width=1),
         dbc.Col([
             html.H3("Expressing Income Inequality"),
             html.H5("Income Inequality Metrics"),
@@ -272,21 +284,29 @@ layout = dbc.Container(fluid=True, children=[
                 This ensures their values represent equal pay for equal productivity and do not skew our Alpha or Beta values. 
                 We thought it was an important metric to include as it represents overall economic inequality in the US.
             """)
-        ], width=12)
+        ], width=10),
+        dbc.Col([
+            ],width=1),
     ], className="mb-4"),
 
     # Section: Income Indquality Metrics Graphs
     dbc.Row([
         dbc.Col([
+            ],width=1),
+        dbc.Col([
             dcc.Graph(id="income_inequality_metrics", figure=metrics_fig)
-        ], width=6),
+        ], width=5),
         dbc.Col([
             dcc.Graph(id="normalized_income_inequality_metrics", figure=norm_fig)
-        ], width=6)
+        ], width=5),
+        dbc.Col([
+            ],width=1),
     ], className="mb-4"),
-
+    
     # Section: Alpha and Beta Parameter Visualization
     dbc.Row([
+        dbc.Col([
+            ],width=1),
         dbc.Col([
             html.H3("Gamma Distribution Parameters, Alpha and Beta"),
             html.P("An income distribution is always skewed like a Gamma Distribution — this has been consistent throughout history. We wanted to find out just how skewed and how spread the data should be using a bootstrap resampling method. As a result, we chose our Gamma parameters: Alpha and Beta, each designated with special weights according to their relevance."),
@@ -304,18 +324,23 @@ layout = dbc.Container(fluid=True, children=[
             html.P("✤ Productivity Gap: 50% — systemic wage divergence creates long-term spread"),
             html.P("✤ Housing Delta: 30% — affordability shocks influence volatility"),
             html.P("✤ Palma Ratio: 20% — still relevant, but more focused on distribution extremes"),
-        ], width=6),
+        ], width=5),
         dbc.Col([
             dcc.Graph(id="beta-trend-plot", figure=alpha_beta_fig)
-        ], width=6)
+        ], width=5),
+        dbc.Col([
+            ],width=1),
+
     ], className="mb-5"),
     dbc.Row([
+        dbc.Col([
+            ],width=1),
         dbc.Col([
             html.H3("Why the Gamma Distribution is a Fair Choice to Measure Income Distribution"),
             html.P("    ✤  We understood from our research that the Income Distribution is always skewed like a Gamma Distribution. This has been consistent throughout history. We wanted to find out just how skewed and how spread the data should be using a bootstrap resampling method. As a result, we chose our Gamma parameters: Alpha and Beta, each designated with special weights according to their relevance."),
             html.P("    ✤  The Gamma distribution is a continuous probability distribution that is often used to model skewed data, such as income distributions. It is defined by two parameters: shape (α) and scale (β). The shape parameter determines the skewness of the distribution, while the scale parameter determines the spread of the distribution. The Gamma distribution is flexible and can take on various shapes depending on the values of α and β, making it suitable for modeling income distributions that are typically right-skewed."),
             html.P("    ✤  We found data from the census representing the mean income for each quintile group. We then used this data to create a pyramid chart that shows the distribution of income across different quintiles. The pyramid chart is a useful way to visualize the distribution of income and to see how it has changed over time."),
-        ], width=6),
+        ], width=5),
         dbc.Col([
             dbc.Col([
                 html.A(
@@ -346,7 +371,9 @@ layout = dbc.Container(fluid=True, children=[
             html.H3("← How to Interpret the Income Distribution Pyramid"),
             html.P("Imagine we have the income distribution for all incomes from every year in our dataset, and we devided the entire distribution into 5 pieces each representing 1/5 of the total population. For each quintile group, the value represented by each bar is the mean income for that group. The pyramid chart shows how the distribution of income has changed over time, as well as the top 5% of earners represented by the top bar."),
             html.P("The data is sourced from the U.S. Census Bureau. More about the data can be found in our data page."),
-        ], width=5),
+        ], width=4),
+        dbc.Col([
+            ],width=1),
     ], className="mb-5"),
 ])
 
