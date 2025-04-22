@@ -84,17 +84,18 @@
 .top-nav .dropdown-content {
   display: none;
   position: absolute;
-  top: 100%; left: 0;
-  width: 100%;
-  min-width: 180px;
+  top: 100%;
+  width: max-content;
+  min-width: 100px;
   padding-top: 20px;
-  /*background: var(--overlay);*/
   border-radius: 4px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   flex-direction: column;
   z-index: 2000;
-
+  left: 50%;                 /* anchor horizontally at the middle          */
+  transform: translateX(-50%); /* move itself back by 50 % of its own width */
 }
+
 .top-nav .dropdown-content a {
   padding: 10px 14px;
   font-size: .95rem;
@@ -119,10 +120,11 @@
 
 @media (max-width: 768px) {
   /* keep dropdowns opening left */
-  .top-nav .dropdown .dropdown-content {
-    left: auto;
-    right: 0;
-  }
+  /*.top-nav .dropdown .dropdown-content {*/
+  /*  left: auto;              !* restore the previous “open‑left” behaviour *!*/
+  /*  right: 0;*/
+  /*  transform: none;         !* cancel the centring shift                  *!*/
+  /*}*/
 
   /* smaller logo */
   .home-icon {
@@ -148,6 +150,7 @@
     min-width: 140px;
     padding-top: 18px;
   }
+
   .top-nav .dropdown-content a {
     padding: 8px 10px;
     font-size: 0.85rem;
