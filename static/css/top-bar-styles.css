@@ -7,69 +7,42 @@
 }
 
 /* Top bar */
+/* Base top‑bar (common to both modes) */
 .top-bar {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
   min-height: 50px;
-  z-index: 1001;
   background: transparent;
   transition: background var(--trans-bg);
 }
+
+/* Overlay mode (bar sits on top of content) */
+.top-bar.fixed {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 1001;
+}
+
+/* Push‑down mode (bar in normal flow) */
+.top-bar.static {
+  position: static;  /* simply flows in document */
+}
+
+/* Background modifier */
 .top-bar.with-background {
   background: var(--overlay);
 }
 
-/* Logo/link */
-.home-icon {
-  margin-right: 45px;
-}
-.home-icon a {
-  font-size: 2rem;
-  color: var(--white);
-  text-decoration: none;
-  opacity: 0.9;
-  transition: opacity var(--trans-fast);
-}
-.home-icon a:hover {
-  opacity: 1;
-}
-
-/* Hamburger */
-.menu-toggle {
-  position: relative;
-  margin-left: 5px;
-  width: 30px; height: 25px;
-  cursor: pointer;
-  z-index: 1002;
-}
-.menu-toggle div {
-  position: absolute;
-  width: 100%; height: 4px;
-  background: var(--white);
-  border-radius: 2px;
-  transition: all 0.4s ease;
-}
-.menu-toggle div:nth-child(1) { top: 0; }
-.menu-toggle div:nth-child(2) { top: 10px; }
-.menu-toggle div:nth-child(3) { bottom: 0; }
-.menu-toggle.active div:nth-child(1) { transform: translateY(10px) rotate(45deg); }
-.menu-toggle.active div:nth-child(2) { opacity: 0; }
-.menu-toggle.active div:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
-
 /* Main nav */
 .top-nav {
-  display: none;
+  display: flex;
   flex: 1;
   margin: 0 20px;
   justify-content: space-around;
-}
-.top-nav.open {
-  display: flex;
+
 }
 
 /* Links & dropdown button */
@@ -105,6 +78,8 @@
 .top-nav .dropdown {
   flex: 1;
   position: relative;
+    padding: 0px 10px 0px 10px;
+
 }
 .top-nav .dropdown-content {
   display: none;
@@ -112,12 +87,13 @@
   top: 100%; left: 0;
   width: 100%;
   min-width: 180px;
-  padding-top: 22.5px;
+  padding-top: 20px;
   /*background: var(--overlay);*/
   border-radius: 4px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   flex-direction: column;
   z-index: 2000;
+
 }
 .top-nav .dropdown-content a {
   padding: 10px 14px;
@@ -127,11 +103,11 @@
   color: var(--white);
   text-decoration: none;
   opacity: .9;
-  background: var(--overlay);
+  background: rgba(0, 0, 0, 0.9);
   transition: background var(--trans-fast), opacity var(--trans-fast);
 }
 .top-nav .dropdown-content a:hover {
-  background: rgba(255,255,255,0.1);
+  background: #003135;
   opacity: 1;
 }
 

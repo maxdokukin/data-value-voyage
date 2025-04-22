@@ -10,11 +10,12 @@ import plotly.graph_objects as go
 import os
 import pandas as pd
 import numpy as np
+from components.topbar import get_topbar
 
 from pages.vis.stats_analysis_vis import build_income_distribution_pyramid
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_dir = os.path.join(BASE_DIR, '..', 'data', 'csv')
+csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')
 
 ############################################
 ############# Graph Call Backs #############
@@ -185,7 +186,7 @@ alpha_beta_fig.update_layout(
 
 
 layout = dbc.Container(fluid=True, children=[
-    navbar.create_navbar(),
+    get_topbar(overlay=False),
 
     # Section: Header / Introduction
     dbc.Row([

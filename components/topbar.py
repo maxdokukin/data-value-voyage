@@ -1,23 +1,26 @@
 from dash import dcc, html
 
-def get_topbar():
+def get_topbar(show_home: bool = True, overlay: bool = True):
+    kind = "fixed" if overlay else "static"
+
+    if show_home:
+        home_option = html.A("🏠", href="/")
+    else:
+        home_option = None
+
     return html.Div([
 
         html.Link(rel='stylesheet', href='/static/css/top-bar-styles.css'),
         html.Div(
             id="topBar",
-            className="top-bar with-background",
+            className=f"top-bar with-background {kind}",
             children=[
-                html.Div(                       # hamburger icon
-                    id="menuToggle",
-                    className="menu-toggle active",
-                    n_clicks=0,
-                    children=[html.Div(), html.Div(), html.Div()],
-                ),
                 html.Div(                       # main nav
                     id="topNav",
                     className="top-nav open",
                     children=[
+
+                        home_option,
                         html.A("Objectives", href="/objectives"),
 
                         # ――― Methods dropdown (CSS‑only) ―――
@@ -30,7 +33,7 @@ def get_topbar():
                                     className="dropdown-content",
                                     children=[
                                         html.A("Quantity Affordable",
-                                               href="/methods/quantity_affordable"),
+                                               href="/methods/quantity-affordable"),
                                         html.A("Gini Income Inequality",
                                                href="/methods/gini"),
                                         html.A("Housing Inequality",

@@ -4,10 +4,11 @@ import pandas as pd
 import os
 from components import navbar
 from pages.vis.housing_vis import housing_sankey, income_affordability_sankey, housing_vs_budget_trend, housing_affordability_delta_trend
+from components.topbar import get_topbar
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_dir = os.path.join(BASE_DIR, '..', 'data', 'csv')
+csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')
 
 csv_path = os.path.join(csv_dir, 'analysis.csv')
 df = pd.read_csv(csv_path)
@@ -17,7 +18,7 @@ years = sorted(df['Year'].str[:4].astype(int).unique())
 
 # Layout for the housing page
 layout = dbc.Container([
-    navbar.create_navbar(),
+    get_topbar(overlay=False),
 
     html.H4("Housing Cost Sankey Diagram"),
     dbc.Row([

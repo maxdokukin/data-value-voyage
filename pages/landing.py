@@ -1,13 +1,14 @@
+from PIL.ImageChops import overlay
 from dash import html, dcc
 import os
 from components.topbar import get_topbar
 
-# Path to the external HTML file
-html_file_path = os.path.join(os.getcwd(), 'static', 'plotly', 'incomes.html')
-
-# Read the HTML content from the file
-with open(html_file_path, 'r', encoding='utf-8') as f:
-    html_content = f.read()
+# # Path to the external HTML file
+# html_file_path = os.path.join(os.getcwd(), 'static', 'plotly', 'incomes.html')
+#
+# # Read the HTML content from the file
+# with open(html_file_path, 'r', encoding='utf-8') as f:
+#     html_content = f.read()
 
 # Layout of the app
 layout = html.Div([
@@ -21,7 +22,7 @@ layout = html.Div([
         # Slide 1 - Top Bar + Hero Section
 
         html.Div(className="section-slide", children=[
-            get_topbar(),
+            get_topbar(show_home=False, overlay=True),
             # Hero Section
             html.Div(className="hero", children=[
                 html.Div(className="overlay", children=[
@@ -51,17 +52,17 @@ layout = html.Div([
         ]),
 
         html.Div(className="section-slide", children=[
-            html.Iframe(
-                src='/static/plotly/incomes.html',  # Path to the HTML file
-                className="plot-container",
-            )
+            # html.Iframe(
+            #     src='/static/plotly/incomes.html',  # Path to the HTML file
+            #     className="plot-container",
+            # )
         ]),
 
         html.Div(className="section-slide", children=[
-            html.Iframe(
-                src='/static/plotly/goods_prices.html',  # Path to the HTML file
-                className="plot-container",
-            )
+            # html.Iframe(
+            #     src='/static/plotly/goods_prices.html',  # Path to the HTML file
+            #     className="plot-container",
+            # )
         ]),
 
         html.Div([
@@ -74,10 +75,10 @@ layout = html.Div([
         ], className="section-slide"),
 
         html.Div(className="section-slide", children=[
-            html.Iframe(
-                src='/static/plotly/goods_affordable.html',  # Path to the HTML file
-                className="plot-container",
-            )
+            # html.Iframe(
+            #     src='/static/plotly/goods_affordable.html',  # Path to the HTML file
+            #     className="plot-container",
+            # )
         ]),
 
     ], className="container-slide"),
