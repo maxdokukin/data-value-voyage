@@ -362,9 +362,11 @@ layout = dbc.Container(fluid=True, children=[
     ], className="mb-4"),
     dbc.Row([
         dbc.Col([
+            ],width=1),
+        dbc.Col([
             html.H3("Income Distribution Pyramid"),
             dcc.Graph(id="income-distribution-pyramid", figure=build_income_distribution_pyramid())
-        ], width=7),
+        ], width=6),
         dbc.Col([
             html.H3("← How to Interpret the Income Distribution Pyramid"),
             html.P("Imagine we have the income distribution for all incomes from every year in our dataset, and we devided the entire distribution into 5 pieces each representing 1/5 of the total population. For each quintile group, the value represented by each bar is the mean income for that group. The pyramid chart shows how the distribution of income has changed over time, as well as the top 5% of earners represented by the top bar."),
