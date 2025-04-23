@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib.colors as mcolors
-from src.db.fetch import fetch_goods_prices
+from src.fetch.from_csv import fetch_goods_prices
 
 
 def get_distinct_years_from_df(df):
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     year_range = (1929, 2024)
 
     df = fetch_goods_prices(
-        db_path='../../data/db/sqlite/database.sqlite',
+        # db_path='../../data/db/sqlite/database.sqlite',
         year_range=year_range,
         # If you want to restrict to a subset of goods, specify the list; otherwise, set to None.
         goods_list=None,
@@ -78,7 +78,7 @@ if __name__ == "__main__":
         output_format='df'
     )
 
-    output_file = f"../../../doc/diagrams/missing_data_heatmap_{year_range[0]}_{year_range[1]}.png"
+    output_file = f"../../doc/figures/missing_data_heatmap_{year_range[0]}_{year_range[1]}.png"
 
     years = get_distinct_years_from_df(df)
     goods = get_distinct_goods_from_df(df)

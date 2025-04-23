@@ -1,4 +1,4 @@
-from src.db.fetch import fetch_goods_prices
+from src.fetch.from_csv import fetch_goods_prices
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -12,7 +12,7 @@ def calculate_goods_inflation(
     output_format='df'
 ):
     prices_df = fetch_goods_prices(
-        db_path=db_path,
+        # db_path=db_path,
         year_range=year_range,
         goods_list=goods_list,
         use_year_averages=use_year_averages,
@@ -95,9 +95,7 @@ if __name__ == "__main__":
         output_format='df'
     )
 
-    inflation_df.to_csv("ahan.csv", index=False)
-
-    output_file = f"../../../doc/diagrams/inflation_heatmap_{year_range[0]}_{year_range[1]}.png"
+    output_file = f"../../doc/figures/inflation_heatmap_{year_range[0]}_{year_range[1]}.png"
 
     matrix = create_inflation_matrix(inflation_df)
     plot_inflation_heatmap(matrix, output_file)

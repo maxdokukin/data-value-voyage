@@ -1,12 +1,12 @@
 from plotly.graph_objects import Figure, Scatter
-from src.db.fetch import fetch_income_intervals_to_purchase
+from src.fetch.from_csv import fetch_income_intervals_to_purchase
 
 def plot_income_intervals_to_purchase(
     db_path, year_range, goods_list, regions,
     income_data_source, salary_interval, output_format
 ):
     df = fetch_income_intervals_to_purchase(
-        db_path=db_path,
+        # db_path=db_path,
         year_range=year_range,
         goods_list=goods_list,
         regions=regions,
