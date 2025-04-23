@@ -1,0 +1,61 @@
+/* Main container styling with flexible margins */
+.container-data-sources {
+    margin: 0 auto; /* Center the content */
+    max-width: 100%; /* Ensure the content doesn't stretch too wide */
+    font-family: Arial, sans-serif;
+}
+
+.data-sources-content {
+    margin: 0 auto;
+    max-width: 90%;
+    margin-top: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* Topbar container styling */
+.topbar-container {
+    background-color: #f8f9fa; /* Matches Bootstrap's light navbar color */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd; /* Adds a subtle border below the top bar */
+}
+
+/* Section title styling */
+.section__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Section description styling */
+.section__description {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Accordion styling */
+.accordion-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Changeable color for open accordion tabs */
+.accordion-item.show {
+    background-color: #4180b6; /* Light blue background for open tabs */
+}
+
+/* Button styling for "Open Table" */
+.open-table-button {
+    background-color: #c3b573; /* Default button color */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.open-table-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Data table container styling */
+.dash-table-container {
+    margin-top: 20px;
+}

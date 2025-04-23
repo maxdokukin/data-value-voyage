@@ -15,6 +15,36 @@ df = pd.read_csv(csv_path)
 df = df[df['Year'].str.endswith('-07')]
 years = sorted(df['Year'].str[:4].astype(int).unique())
 
+def get_housing_tabs():
+    return dbc.Tabs(
+        [
+            dbc.Tab(
+                children=[
+                    html.Div(
+                        "Housing Budget Trends",
+                        style={"text-align": "center", "font-size": "16px", "color": "black"}
+                    ),
+                    dcc.Graph(figure=housing_vs_budget_trend())
+                ],
+                tab_id="housing-budget-trends",
+                label="Housing Budget Trends"
+            ),
+            dbc.Tab(
+                children=[
+                    html.Div(
+                        "Housing Budget Affordability Delta",
+                        style={"text-align": "center", "font-size": "16px", "color": "black"}
+                    ),
+                    dcc.Graph(figure=housing_affordability_delta_trend())
+                ],
+                tab_id="housing-budget-affordability-delta",
+                label="Affordability Delta"
+            )
+        ],
+        id="housing-tabs",
+        active_tab="housing-budget-trends"
+    )
+
 # Layout for the housing page
 layout = dbc.Container([
     get_topbar(overlay=False),
@@ -53,22 +83,7 @@ layout = dbc.Container([
             dcc.Graph(id='income-sankey-graph')
         ], width=6),
         dbc.Col([
-            dbc.Tabs([
-                dbc.Tab(
-                    children=[
-                        html.Div("Housing Budget Trends", style={"text-align": "center", "font-size": "16px", "color": "black"}),
-                        dcc.Graph(figure=housing_vs_budget_trend())
-                    ],
-                    tab_id="housing-budget-trends"
-                ),
-                dbc.Tab(
-                    children=[
-                        html.Div("Housing Budget Affordability Delta", style={"text-align": "center", "font-size": "16px", "color": "black"}),
-                        dcc.Graph(figure=housing_affordability_delta_trend())
-                    ],
-                    tab_id="housing-budget-affordability-delta"
-                )
-            ])
+            get_housing_tabs()  # Call the reusable tabs function here
         ], width=6, className="mt-4"),
     ]),
     dbc.Row([
