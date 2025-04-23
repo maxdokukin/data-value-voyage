@@ -22,7 +22,7 @@ layout = html.Div([
         # Slide 1 - Top Bar + Hero Section
 
         html.Div(className="section-slide", children=[
-            get_topbar(show_home=False, overlay=True),
+            get_topbar(show_home=True, overlay=True),
             # Hero Section
             html.Div(className="hero", children=[
                 html.Div(className="overlay", children=[
