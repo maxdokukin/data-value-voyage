@@ -3,7 +3,8 @@ warnings.filterwarnings("ignore", category=UserWarning, module='pandas')
 
 from dash import Dash, dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
-from pages import landing, objectives, findings
+from pages import objectives, findings
+from pages.landing import landing
 from pages.methods import housing, quantity_affordable, gini
 from pages.more import eda, data_sources, about_us
 
