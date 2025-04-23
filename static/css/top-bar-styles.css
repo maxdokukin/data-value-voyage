@@ -12,7 +12,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
   min-height: 50px;
   background: transparent;
   transition: background var(--trans-bg);
@@ -118,6 +117,37 @@
   display: flex;
 }
 
+/* ───────────────────────────────────────────────────────────────
+   Dedicated 100 × 60 px blocks on both sides of the top-bar
+   ───────────────────────────────────────────────────────────── */
+.side-block {
+  width: 100px;        /* 60 px icon + 20 px padding on each side */
+  height: 60px;
+  flex: 0 0 100px;     /* fixed size so main nav stays centred   */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Home icon already sized at 40 × 40 px – keeps your old hover */
+.icon-home {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+/* Remove the old left/right margin from the nav – the side blocks
+   now provide the spacing */
+.top-nav {
+  margin: 0;
+  justify-content: space-around;
+}
+
+
+.icon-home:hover {
+    transform: scale(1.3);
+}
+
 @media (max-width: 768px) {
   /* keep dropdowns opening left */
   /*.top-nav .dropdown .dropdown-content {*/
@@ -127,12 +157,7 @@
   /*}*/
 
   /* smaller logo */
-  .home-icon {
-    margin-right: 30px;
-  }
-  .home-icon a {
-    font-size: 1.5rem;
-  }
+
 
   /* tighter nav spacing */
   .top-nav {
