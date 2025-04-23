@@ -2,7 +2,7 @@ from dash import dcc, html
 from components.topbar import get_topbar
 
 layout = html.Div(children=[
-    get_topbar(overlay=False),  # Top bar remains outside the container
+    get_topbar(current_path="/about-us", overlay=False),  # Top bar remains outside the container
 
     html.Div(className='container-about-us', children=[
         html.Link(rel='stylesheet', href='/static/css/about-us-styles.css'),

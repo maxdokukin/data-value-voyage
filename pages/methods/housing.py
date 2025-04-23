@@ -47,7 +47,7 @@ def get_housing_tabs():
 
 # Layout for the housing page
 layout = dbc.Container([
-    get_topbar(overlay=False),
+    get_topbar(current_path="/methods/housing", overlay=False),
 
     html.Link(rel="stylesheet", href="/static/css/methods-styles.css"),
 

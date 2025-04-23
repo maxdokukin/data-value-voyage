@@ -167,3 +167,23 @@
 
   }
 }
+
+/*──────────────────────────────────────────────────
+  Active-page Highlight
+──────────────────────────────────────────────────*/
+.top-nav a.active,
+.top-nav .dropbtn.active {
+  pointer-events: none;               /* disable click */
+  opacity: 1;                         /* full opacity */
+  text-shadow: 0 0 3px var(--white);  /* matches your :hover */
+  text-decoration: underline;         /* matches your :hover */
+  cursor: default;
+}
+
+/* if you want dropdown-submenu items also non-clickable */
+.top-nav .dropdown-content a.active {
+  background: #003135; /* matches your a:hover BG */
+  opacity: 1;
+  pointer-events: none;
+  cursor: default;
+}

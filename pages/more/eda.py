@@ -196,7 +196,7 @@ def get_income_shares_graph():
 # Define the layout for the analysis page
 layout = dbc.Container(
     [
-        get_topbar(overlay=False),
+        get_topbar(current_path="/eda", overlay=False),
 
         dbc.Row(
             [

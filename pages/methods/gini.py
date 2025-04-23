@@ -184,7 +184,7 @@ alpha_beta_fig.update_layout(
 
 
 layout = dbc.Container(fluid=True, children=[
-    get_topbar(overlay=False),
+    get_topbar(current_path="/methods/gini", overlay=False),
 
     # Section: Header / Introduction
     dbc.Row([

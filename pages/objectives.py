@@ -2,7 +2,7 @@ from dash import dcc, html
 from components.topbar import get_topbar
 
 layout = html.Div(className='container-objectives', children=[
-    get_topbar(overlay=False),
+    get_topbar(current_path="/objectives", overlay=False),
 
     html.Link(rel='stylesheet', href='/static/css/objective-styles.css'),
 

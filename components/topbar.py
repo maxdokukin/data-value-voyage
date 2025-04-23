@@ -1,9 +1,13 @@
-from dash import dcc, html
+from dash import html
 
-def get_topbar(show_home: bool = True, overlay: bool = True):
+def get_topbar(current_path: str = "/", show_home: bool = True, overlay: bool = True):
+    """
+    Renders the top bar, highlighting (and disabling) whichever menu item
+    matches current_path. No callbacks needed—just pass dash.Location.pathname.
+    """
     kind = "fixed" if overlay else "static"
 
-    # ── left-hand block ────────────────────────────────────────────────
+    # ── Home icon block ────────────────────────────────────────────────
     left_block = html.Div(
         className="side-block",
         children=[
@@ -15,45 +19,103 @@ def get_topbar(show_home: bool = True, overlay: bool = True):
                 ),
                 href="/",
             )
-        ] if show_home else []          # still reserves the space if home hidden
+        ] if show_home else []
     )
 
-    # ── main navigation (unchanged minus the home link) ───────────────
+    # Determine which dropdowns should appear “active”
+    methods_active = current_path.startswith("/methods")
+    more_active = any(current_path.startswith(p) for p in [
+        "/eda", "/data-sources", "/about-us"
+    ])
+
+    # ── Main navigation ─────────────────────────────────────────────────
     nav = html.Div(
         id="topNav",
         className="top-nav open",
         children=[
-            html.A("Objectives", href="/objectives"),
+            # Objectives
+            html.A(
+                "Objectives",
+                href="/objectives",
+                className="active" if current_path == "/objectives" else None
+            ),
 
             # Methods dropdown
             html.Div(
                 className="dropdown",
                 children=[
-                    html.A("Methods ▾", className="dropbtn"),
+                    html.A(
+                        "Methods ▾",
+                        href="/methods",
+                        className="dropbtn active" if methods_active else "dropbtn"
+                    ),
                     html.Div(
                         className="dropdown-content",
                         children=[
-                            html.A("Quantity Affordable", href="/methods/quantity-affordable"),
-                            html.A("Gini Income Inequality", href="/methods/gini"),
-                            html.A("Housing Inequality", href="/methods/housing"),
+                            html.A(
+                                "Quantity Affordable",
+                                href="/methods/quantity-affordable",
+                                className="active"
+                                if current_path == "/methods/quantity-affordable"
+                                else None
+                            ),
+                            html.A(
+                                "Gini Income Inequality",
+                                href="/methods/gini",
+                                className="active"
+                                if current_path == "/methods/gini"
+                                else None
+                            ),
+                            html.A(
+                                "Housing Inequality",
+                                href="/methods/housing",
+                                className="active"
+                                if current_path == "/methods/housing"
+                                else None
+                            ),
                         ],
                     ),
                 ],
             ),
 
-            html.A("Findings", href="/findings"),
+            # Findings
+            html.A(
+                "Findings",
+                href="/findings",
+                className="active" if current_path == "/findings" else None
+            ),
 
             # More dropdown
             html.Div(
                 className="dropdown",
                 children=[
-                    html.A("More ▾", className="dropbtn"),
+                    html.A(
+                        "More ▾",
+                        href="/eda",
+                        className="dropbtn active" if more_active else "dropbtn"
+                    ),
                     html.Div(
                         className="dropdown-content",
                         children=[
-                            html.A("Explore Data", href="/eda"),
-                            html.A("Data Sources", href="/data-sources"),
-                            html.A("About Us", href="/about-us"),
+                            html.A(
+                                "Explore Data",
+                                href="/eda",
+                                className="active" if current_path == "/eda" else None
+                            ),
+                            html.A(
+                                "Data Sources",
+                                href="/data-sources",
+                                className="active"
+                                if current_path == "/data-sources"
+                                else None
+                            ),
+                            html.A(
+                                "About Us",
+                                href="/about-us",
+                                className="active"
+                                if current_path == "/about-us"
+                                else None
+                            ),
                         ],
                     ),
                 ],
@@ -61,8 +123,7 @@ def get_topbar(show_home: bool = True, overlay: bool = True):
         ],
     )
 
-    # ── right-hand placeholder block ──────────────────────────────────
-
+    # ── Render the bar ──────────────────────────────────────────────────
     return html.Div(
         [
             html.Link(rel="stylesheet", href="/static/css/top-bar-styles.css"),
