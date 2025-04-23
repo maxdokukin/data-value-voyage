@@ -62,7 +62,6 @@ def get_topbar(show_home: bool = True, overlay: bool = True):
     )
 
     # ── right-hand placeholder block ──────────────────────────────────
-    right_block = html.Div(className="side-block")  # empty – just a spacer
 
     return html.Div(
         [
@@ -70,7 +69,7 @@ def get_topbar(show_home: bool = True, overlay: bool = True):
             html.Div(
                 id="topBar",
                 className=f"top-bar with-background {kind}",
-                children=[left_block, nav, right_block],
+                children=[left_block, nav],
             ),
         ]
     )

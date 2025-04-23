@@ -86,7 +86,7 @@
   top: 100%;
   width: max-content;
   min-width: 100px;
-  padding-top: 20px;
+  padding-top: 19px;
   border-radius: 4px;
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   flex-direction: column;
@@ -121,9 +121,9 @@
    Dedicated 100 × 60 px blocks on both sides of the top-bar
    ───────────────────────────────────────────────────────────── */
 .side-block {
-  width: 100px;        /* 60 px icon + 20 px padding on each side */
+  width: 80px;        /* 60 px icon + 20 px padding on each side */
   height: 60px;
-  flex: 0 0 100px;     /* fixed size so main nav stays centred   */
+  flex: 0 0 80px;     /* fixed size so main nav stays centred   */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -149,17 +149,6 @@
 }
 
 @media (max-width: 768px) {
-  /* keep dropdowns opening left */
-  /*.top-nav .dropdown .dropdown-content {*/
-  /*  left: auto;              !* restore the previous “open‑left” behaviour *!*/
-  /*  right: 0;*/
-  /*  transform: none;         !* cancel the centring shift                  *!*/
-  /*}*/
-
-  /* smaller logo */
-
-
-  /* tighter nav spacing */
   .top-nav {
     margin: 0 10px;
   }
@@ -173,7 +162,7 @@
   /* smaller dropdown menu */
   .top-nav .dropdown-content {
     min-width: 140px;
-    padding-top: 18px;
+    padding-top: 21px;
   }
 
   .top-nav .dropdown-content a {
