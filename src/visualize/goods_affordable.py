@@ -1,10 +1,10 @@
 from plotly.graph_objects import Figure, Scatter
-from src.fetch.from_sqlite import fetch_final_goods_affordable
+from src.fetch.from_csv import fetch_final_goods_affordable
 
 
 def plot_incomes_inf_final_goods(db_path, year_range, goods_list, regions, income_data_source, salary_interval, output_format):
     df = fetch_final_goods_affordable(
-        db_path=db_path,
+        # db_path=db_path,
         year_range=year_range,
         goods_list=goods_list,
         regions=regions,

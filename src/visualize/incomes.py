@@ -1,5 +1,5 @@
 from plotly.graph_objects import Figure, Scatter
-from src.fetch.from_sqlite import fetch_incomes
+from src.fetch.from_csv import fetch_incomes
 from plotly.io import to_html
 
 def compare_income_data_sources(db_path, start_year, end_year, regions, sources, markers, output_format, output_file=None, y_scale='log'):
@@ -7,7 +7,7 @@ def compare_income_data_sources(db_path, start_year, end_year, regions, sources,
 
     for source, marker in zip(sources, markers):
         df = fetch_incomes(
-            db_path=db_path,
+            # db_path=db_path,
             year_range=(start_year, end_year),
             data_source_name=source,
             regions=regions,

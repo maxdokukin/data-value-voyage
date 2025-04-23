@@ -1,9 +1,9 @@
 from plotly.graph_objects import Figure, Scatter
-from src.fetch.from_sqlite import fetch_goods_prices
+from src.fetch.from_csv import fetch_goods_prices
 
 def plot_goods_prices(db_path, year_range, goods_list, output_format):
     df = fetch_goods_prices(
-        db_path=db_path,
+        # db_path=db_path,
         year_range=year_range,
         goods_list=goods_list,
         output_format=output_format

@@ -1,9 +1,9 @@
 from dash import html, dash_table, dcc
-from src.fetch.from_sqlite import fetch_final_goods_affordable
+from src.fetch.from_csv import fetch_final_goods_affordable
 from components.button import get_button
 
 # Parameters
-db_path = 'data/db/sqlite/database.sqlite'
+# db_path = 'data/db/sqlite/database.sqlite'
 goods_list = [
     'bacon','bread','butter','coffee','eggs','flour','milk',
     'pork chop','round steak','sugar','gas'
@@ -14,7 +14,7 @@ salary_interval = 'monthly'
 
 # Fetch decade data
 df_1920s = fetch_final_goods_affordable(
-    db_path=db_path,
+    # db_path=db_path,
     year_range=(1920, 1929),
     goods_list=goods_list,
     regions=regions,
@@ -24,7 +24,7 @@ df_1920s = fetch_final_goods_affordable(
 )
 
 df_2020s = fetch_final_goods_affordable(
-    db_path=db_path,
+    # db_path=db_path,
     year_range=(2020, 2029),
     goods_list=goods_list,
     regions=regions,
