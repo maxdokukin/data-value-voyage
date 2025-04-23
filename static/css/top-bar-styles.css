@@ -85,14 +85,16 @@
   white-space: normal;
   transition: opacity var(--trans-fast), text-shadow var(--trans-fast);
 }
-.top-nav a:hover,
-.top-nav .dropbtn:hover {
+.top-nav a:hover {
   opacity: 1;
   text-shadow: 0 0 3px var(--white);
   text-decoration: underline;
 }
-
-/* Dropdown Container */
+.top-nav .dropbtn:hover {
+  opacity: 1;
+  text-shadow: 0 0 3px var(--white);
+  text-decoration: none;
+}
 .top-nav .dropdown {
   flex: 1;
   position: relative;
