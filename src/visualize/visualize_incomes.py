@@ -1,5 +1,5 @@
 from plotly.graph_objects import Figure, Scatter
-from src.functions.db.fetch import fetch_incomes
+from src.db.fetch import fetch_incomes
 from plotly.io import to_html
 
 
@@ -41,7 +41,7 @@ def compare_income_data_sources(db_path, start_year, end_year, regions, sources,
 
 
 if __name__ == "__main__":
-    db_path = '../../../data/db/sqlite/database.sqlite'
+    db_path = '../../data/db/sqlite/database.sqlite'
     start_year = 1900
     end_year = 2024
     regions = ['united states']

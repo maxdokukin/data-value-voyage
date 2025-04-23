@@ -1,8 +1,6 @@
-import glob
-import os
 import numpy as np
 import pandas as pd
-from src.functions.db.insert import bulk_insert_incomes
+from src.insert.to_sqlite import bulk_insert_incomes
 
 def process_csv(db_path, csv_path):
     required_columns = ['year', 'average_income_unadjusted']
@@ -28,7 +26,7 @@ def process_csv(db_path, csv_path):
     print(result)
 
 if __name__ == "__main__":
-    csv_path = r"../../../data/raw/input_data_csv/incomes/fred_incomes.csv"
+    csv_path = r"../../data/raw/input_data_csv/incomes/fred_incomes.csv"
     db_path = r"../../../data/database/incomes.db"  # SQLite database path
     print(f"Processing {csv_path}")
     process_csv(db_path, csv_path)

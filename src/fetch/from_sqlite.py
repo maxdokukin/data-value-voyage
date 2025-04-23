@@ -201,7 +201,7 @@ def fetch_bea_incomes(db_path):
 
 if __name__ == '__main__':
 
-    db_path = '../../../data/db/sqlite/database.sqlite'
+    db_path = '../../data/db/sqlite/database.sqlite'
 
     # fetch incomes sample use
     # data = fetch_incomes(

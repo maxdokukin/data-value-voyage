@@ -1,7 +1,7 @@
 import glob
 import os
 import pandas as pd
-from src.functions.db.insert import bulk_insert_good_price_entries
+from src.insert.to_sqlite import bulk_insert_good_price_entries
 
 def process_csv(db_path, csv_path):
     print(f"Starting processing file: {csv_path}")
@@ -107,8 +107,8 @@ def process_csv(db_path, csv_path):
     print(f"Finished processing file: {csv_path}\n")
 
 if __name__ == "__main__":
-    csv_dir_path = r"../../../data/raw/input_data_csv/goods"
-    db_path = r"../../../data/db/sqlite/database.sqlite"
+    csv_dir_path = r"../../data/raw/input_data_csv/goods"
+    db_path = r"../../data/db/sqlite/database.sqlite"
 
     csv_files = glob.glob(os.path.join(csv_dir_path, "*.csv"))
     print(f"Found CSV files: {csv_files}")

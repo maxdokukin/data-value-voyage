@@ -1,5 +1,5 @@
 from plotly.graph_objects import Figure, Scatter
-from src.functions.db.fetch import fetch_income_intervals_to_purchase
+from src.db.fetch import fetch_income_intervals_to_purchase
 
 def plot_income_intervals_to_purchase(
     db_path, year_range, goods_list, regions,
@@ -54,7 +54,7 @@ def plot_income_intervals_to_purchase(
 
 if __name__ == "__main__":
     fig = plot_income_intervals_to_purchase(
-        db_path='../../../data/db/sqlite/database.sqlite',
+        db_path='../../data/db/sqlite/database.sqlite',
         year_range=(1953, 2024),
         goods_list=['house'],
         # goods_list=['Private 4-Year Tuition', 'Public 4-Year Tuition'],

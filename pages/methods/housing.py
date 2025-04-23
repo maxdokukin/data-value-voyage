@@ -2,7 +2,6 @@ from dash import dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
 import pandas as pd
 import os
-from components import navbar
 from pages.vis.housing_vis import housing_sankey, income_affordability_sankey, housing_vs_budget_trend, housing_affordability_delta_trend
 from components.topbar import get_topbar
 

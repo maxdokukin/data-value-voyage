@@ -1,5 +1,5 @@
 from plotly.graph_objects import Figure, Scatter
-from src.functions.db.fetch import fetch_goods_prices
+from src.db.fetch import fetch_goods_prices
 
 
 
@@ -43,7 +43,7 @@ def plot_goods_prices(db_path, year_range, goods_list, output_format):
 if __name__ == "__main__":
     # Specify the database path and parameters
     fig = plot_goods_prices(
-        db_path='../../../data/db/sqlite/database.sqlite',
+        db_path='../../data/db/sqlite/database.sqlite',
         year_range=(1900, 2020),
         goods_list=['bacon', 'bread', 'butter', 'coffee', 'eggs', 'flour', 'milk', 'pork chop', 'round steak', 'sugar',
                     'gas'],

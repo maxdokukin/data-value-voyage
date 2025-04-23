@@ -1,7 +1,4 @@
-import pandas as pd
-import sqlite3
-import json
-from src.functions.db.fetch import fetch_goods_prices
+from src.db.fetch import fetch_goods_prices
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -91,7 +88,7 @@ if __name__ == "__main__":
     year_range = (1929, 2024)
 
     inflation_df = calculate_goods_inflation(
-        db_path='../../../data/db/sqlite/database.sqlite',
+        db_path='../../data/db/sqlite/database.sqlite',
         year_range=year_range,
         goods_list=None,
         use_year_averages=True,

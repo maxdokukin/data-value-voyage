@@ -13,7 +13,7 @@ DB_USER = os.getenv('DB_USER')
 DB_PASSWORD = os.getenv('DB_PASSWORD')
 DB_NAME = os.getenv('DB_NAME')
 
-dump_file = '../../../data/db/mysql/mysql_dump.sql'
+dump_file = '../../data/db/mysql/mysql_dump.sql'
 
 # Step 1: Dump the MySQL database to a file using mysqldump.
 cmd = [
@@ -83,7 +83,7 @@ for stmt in statements:
     # Other statements (like SET, DROP, etc.) can be skipped or handled as needed.
 
 # Connect to (or create) the SQLite database.
-sqlite_conn = sqlite3.connect('../../../data/db/sqlite/database.sqlite')
+sqlite_conn = sqlite3.connect('../../data/db/sqlite/database.sqlite')
 cursor = sqlite_conn.cursor()
 
 print("Processing SQL statements and creating SQLite database...")

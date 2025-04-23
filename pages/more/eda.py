@@ -10,7 +10,6 @@ import numpy as np
 # from src.functions.db.fetch import fetch_goods_prices
 # from src.functions.db.fetch import fetch_bea_incomes
 # from scripts.python.data_visualization.visualize_final_goods import plot_incomes_inf_final_goods
-from components import navbar
 from components.topbar import get_topbar
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

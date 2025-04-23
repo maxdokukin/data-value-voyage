@@ -1,7 +1,5 @@
-import glob
-import os
 import pandas as pd
-from src.functions.db.insert import bulk_insert_incomes
+from src.insert.to_sqlite import bulk_insert_incomes
 
 def process_csv(db_path, csv_path):
     df = pd.read_csv(csv_path)
@@ -26,7 +24,7 @@ def process_csv(db_path, csv_path):
     print(result)
 
 if __name__ == "__main__":
-    csv_path = r"../../../data/raw/input_data_csv/incomes/bea_incomes.csv"
+    csv_path = r"../../data/raw/input_data_csv/incomes/bea_incomes.csv"
     db_path = r"../../../data/database/incomes.db"  # Define your SQLite database path here
     print(f"Processing {csv_path}")
     process_csv(db_path, csv_path)
