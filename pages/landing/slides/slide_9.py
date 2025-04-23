@@ -1,4 +1,5 @@
 from dash import html, dcc
-from components.topbar import get_topbar
 
-layout = html.Div(className="section-slide", children=[])
+layout = html.Div(className="section-slide", children=[
+    html.H2("But now, lets look at the income inequality"),
+])

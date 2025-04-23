@@ -1,6 +1,6 @@
-from dash import html, dash_table
-import pandas as pd
+from dash import html, dash_table, dcc
 from src.fetch.from_sqlite import fetch_final_goods_affordable
+from components.button import get_button
 
 # Parameters
 db_path = 'data/db/sqlite/database.sqlite'
@@ -63,10 +63,16 @@ comparison_records = sorted(
     reverse=True
 )
 
-# Slide layout
+# Slide layout with a styled "Learn More" button in the top-right
 layout = html.Div(
     className="section-slide",
     children=[
+        get_button(
+            label="Learn More about this Method",
+            link="/methods/quantity-affordable",
+            color="#693382",
+            size=(300, 50)
+        ),
         html.Div(
             className="table-container",
             children=dash_table.DataTable(
@@ -85,6 +91,7 @@ layout = html.Div(
                     'color': 'black'
                 }
             )
-        )
+        ),
+        html.Div(className="scroll-hint", children="↓")
     ]
 )
