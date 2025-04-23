@@ -1,7 +1,5 @@
 from plotly.graph_objects import Figure, Scatter
-from src.db.fetch import fetch_goods_prices
-
-
+from src.fetch.from_sqlite import fetch_goods_prices
 
 def plot_goods_prices(db_path, year_range, goods_list, output_format):
     df = fetch_goods_prices(
@@ -26,7 +24,6 @@ def plot_goods_prices(db_path, year_range, goods_list, output_format):
             yaxis_title="Price (USD)"
         )
     else:
-        # If multiple years, create a line chart
         for (good, unit), group in df.groupby(['name', 'good_unit']):
             fig.add_trace(Scatter(x=group['year'], y=group['price'], mode='lines+markers', name=f"{good} ({unit})"))
         fig.update_layout(
