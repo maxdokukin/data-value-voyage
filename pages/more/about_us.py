@@ -21,9 +21,9 @@ layout = html.Div(children=[
                 ]),
                 html.Ul(className='profile__contributions', children=[
                     html.Li('Motivation, Story, and Project Direction'),
+                    html.Li('Web App Architecture Design and Development'),
                     html.Li('Affordable Quantity Analysis'),
-                    html.Li('Web Application Design and Development'),
-                    html.Li('Database Design Engineer'),
+                    html.Li('Database Design and Maintenance'),
                 ]),
             ]),
 

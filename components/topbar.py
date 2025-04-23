@@ -98,6 +98,10 @@ def get_topbar(current_path: str = "/", show_home: bool = True, overlay: bool = 
                         className="dropdown-content",
                         children=[
                             html.A(
+                                "GitHub Repo",
+                                href="https://github.com/ryanfernald/Value-Voyage",
+                            ),
+                            html.A(
                                 "Explore Data",
                                 href="/eda",
                                 className="active" if current_path == "/eda" else None
