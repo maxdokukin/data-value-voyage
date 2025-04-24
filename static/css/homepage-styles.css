@@ -50,3 +50,74 @@
     transform: translateX(-50%) translateY(10px);
   }
 }
+
+/*about us slide*/
+.profiles {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.profile {
+    text-align: center;
+    flex: 1;
+    max-width: 70%;
+}
+
+.profile__image {
+    width: 14rem;
+    height: 14rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 2rem 0 1rem;
+    border: 0.1rem solid #110606;
+}
+
+.profile__name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.profile__description {
+    font-size: 1rem;
+    color: #fff;
+    line-height: 1.6;
+}
+
+.profile__links {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.icon {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+    background: #fff;
+    border: 0.2rem solid #000;
+    border-radius: 25%;
+}
+
+.icon:hover {
+    transform: scale(1.3);
+}
+
+.profile__contributions {
+    list-style: disc;
+    margin: 1rem 0 1;
+    padding-left: 1.5rem;
+    text-align: left;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-left : 2rem;
+}
+
+.profile__contributions li {
+    margin-bottom: 0.5rem;
+}
