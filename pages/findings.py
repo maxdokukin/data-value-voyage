@@ -56,7 +56,7 @@ for name in goods_list:
     })
 records = sorted(records, key=lambda x: x['% Change'], reverse=True)
 
-# Gini coefficient trend
+# Gini coefficient trend\BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR, '..', 'data', 'csv')
 def fetch_gini_over_time(): return pd.read_csv(os.path.join(csv_dir,'gini_year.csv'))
@@ -67,13 +67,17 @@ gini_fig = go.Figure(data=go.Scatter(
     mode='lines+markers', line=dict(color='orange',width=2), marker=dict(size=4)
 ))
 
+# Findings page layout
 layout = html.Div(className='container-findings', children=[
     get_topbar(current_path='/findings', overlay=False),
     html.Link(rel='stylesheet', href='/static/css/findings-styles.css'),
 
     # Method 1: Purchasing Power Findings
     html.Div(className='section', children=[
-        html.H3('Purchasing Power Findings'),
+        html.Div(className='section-header d-flex align-items-center justify-content-between', children=[
+            html.H3('Purchasing Power Findings'),
+            dbc.Button('View Method', href='/methods/quantity-affordable', color='secondary', size='sm')
+        ]),
         html.P('By dividing average monthly income by CPI-based prices for a basket of goods, we measured how many units an average consumer could afford per month. Comparing the 1920s to the 2020s shows declines across all items.'),
         html.P('Flour and sugar affordability dropped by over 90%, eggs fell ~13%, pork chops and bacon by ~40–45%, milk by ~57%, and butter became effectively unaffordable.'),
         html.Div(className='table-container', children=[
@@ -88,7 +92,10 @@ layout = html.Div(className='container-findings', children=[
 
     # Method 2: Income Inequality Findings
     html.Div(className='section', children=[
-        html.H3('Income Inequality Findings'),
+        html.Div(className='section-header d-flex align-items-center justify-content-between', children=[
+            html.H3('Income Inequality Findings'),
+            dbc.Button('View Method', href='/methods/gini', color='secondary', size='sm')
+        ]),
         html.P('Using Lorenz curves and Gini coefficients, income distribution was quantified from 1900 to 2020. The Gini rose from ~0.45 to >0.49, indicating growing inequality.'),
         html.P('Normalized metrics (Palma Ratio, Housing Delta, Productivity Gap) served as alpha/beta parameters in a Gamma distribution, revealing increasing skew and dispersion over time.'),
         dbc.Row([dbc.Col([],width=1), dbc.Col([dcc.Graph(id='gini-trend',figure=gini_fig)],width=10), dbc.Col([],width=1)])
@@ -96,7 +103,10 @@ layout = html.Div(className='container-findings', children=[
 
     # Method 3: Housing Affordability Findings
     html.Div(className='section', children=[
-        html.H3('Housing Affordability Findings'),
+        html.Div(className='section-header d-flex align-items-center justify-content-between', children=[
+            html.H3('Housing Affordability Findings'),
+            dbc.Button('View Method', href='/methods/housing', color='secondary', size='sm')
+        ]),
         html.P('Our housing analysis combined Sankey diagrams, budget trend charts, and affordability delta metrics to assess structural barriers in homeownership.'),
         html.P('A 20% down payment requirement and cumulative costs (interest, taxes, insurance) disproportionately exclude lower-income households. The gap between actual housing expenditures and the recommended 30% budget has widened, straining disposable income.'),
         dbc.Row([
