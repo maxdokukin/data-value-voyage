@@ -1,9 +1,25 @@
 from dash import dcc, html
 from components.topbar import get_topbar
+import dash_bootstrap_components as dbc
+from pages.vis.quantity_affordable_vis import create_goods_price_change_heatmap_dollar_change, create_goods_price_change_heatmap_percent_change, price_change_tabs
+from dash import dcc, html, Input, Output, callback
+
 
 layout = html.Div(className='container-objectives', children=[
     get_topbar(current_path="/methods/quantity-affordable", overlay=False),
 
     # html.Link(rel='stylesheet', href='/static/css/objective-styles.css'),
-    html.H2('Construction quantity-affordable', className='section__title'),
+    dbc.Container(fluid=True, children=[
+        dbc.Row([
+            dbc.Col([
+                html.Div(
+                    "Quantity Affordable Goods Heatmap Temp",
+                    style={"text-align": "center", "font-size": "16px", "color": "black"}
+                ),
+                dbc.Col([
+                    price_change_tabs()
+                ])
+            ], width=6)
+        ])
+    ])
 ])

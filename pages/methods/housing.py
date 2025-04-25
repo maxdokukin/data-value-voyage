@@ -83,7 +83,7 @@ layout = dbc.Container([
             dcc.Graph(id='income-sankey-graph')
         ], width=6),
         dbc.Col([
-            get_housing_tabs()  # Call the reusable tabs function here
+            get_housing_tabs()
         ], width=6, className="mt-4"),
     ]),
     dbc.Row([
