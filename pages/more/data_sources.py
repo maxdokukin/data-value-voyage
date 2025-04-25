@@ -87,7 +87,7 @@ accordion = dbc.Accordion(
                         style_table={"overflowX": "auto"},
                         style_cell={"textAlign": "left"},
                     ),
-                    id="collapse-goods-table",
+                    id="collapse-goods",
                     is_open=False,
                 ),
             ],
@@ -136,7 +136,7 @@ accordion = dbc.Accordion(
                         style_table={"overflowX": "auto"},
                         style_cell={"textAlign": "left"},
                     ),
-                    id="collapse-housing-table",
+                    id="collapse-housing",
                     is_open=False,
                 ),
                 html.P(""),
@@ -221,7 +221,7 @@ accordion = dbc.Accordion(
                         style_table={"overflowX": "auto"},
                         style_cell={"textAlign": "left"},
                     ),
-                    id="collapse-income-table",
+                    id="collapse-income",
                     is_open=False,
                 ),
                 # dbc.Button(
@@ -291,17 +291,17 @@ layout = html.Div(className="container-data-sources", children=[
 
 # Callbacks for collapsible buttons
 @callback(
-    Output("collapse-goods-table", "is_open"),
+    Output("collapse-goods", "is_open"),
     Input("collapse-button-goods", "n_clicks"),
-    State("collapse-goods-table", "is_open"),
+    State("collapse-goods", "is_open"),
 )
 def toggle_goods(n, is_open):
     return not is_open if n else is_open
 
 @callback(
-    Output("collapse-housing-table", "is_open"),
+    Output("collapse-housing", "is_open"),
     Input("collapse-button-housing", "n_clicks"),
-    State("collapse-housing-table", "is_open"),
+    State("collapse-housing", "is_open"),
 )
 def toggle_housing(n, is_open):
     return not is_open if n else is_open
@@ -315,9 +315,9 @@ def toggle_interest_rates(n, is_open):
     return not is_open if n else is_open
 
 @callback(
-    Output("collapse-income-table", "is_open"),
+    Output("collapse-income", "is_open"),
     Input("collapse-button-income", "n_clicks"),
-    State("collapse-income-table", "is_open"),
+    State("collapse-income", "is_open"),
 )
 def toggle_income(n, is_open):
     return not is_open if n else is_open
