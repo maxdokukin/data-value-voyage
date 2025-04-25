@@ -12,14 +12,10 @@ layout = html.Div(className='container-objectives', children=[
     dbc.Container(fluid=True, children=[
         dbc.Row([
             dbc.Col([
-                html.Div(
-                    "Quantity Affordable Goods Heatmap Temp",
-                    style={"text-align": "center", "font-size": "16px", "color": "black"}
-                ),
                 dbc.Col([
                     price_change_tabs()
                 ])
-            ], width=6)
+            ], width=8)
         ])
     ])
 ])

@@ -92,7 +92,7 @@ def create_goods_price_change_heatmap_percent_change():
     pivot = df_decades.pivot_table(index='name', columns='year', values='price')
 
     # Calculate percent change and drop the first column (no prior comparison)
-    pct_change = pivot.pct_change(axis=1).iloc[:, 1:] * 100
+    pct_change = pivot.pct_change(axis=1, fill_method=None).iloc[:, 1:] * 100
     pct_change = pct_change.round(2)
     years = pct_change.columns.to_list()
     goods = pct_change.index.to_list()
