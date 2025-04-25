@@ -275,7 +275,7 @@ accordion = dbc.Accordion(
 
 # Layout
 layout = html.Div(className="container-data-sources", children=[
-    get_topbar(overlay=False),
+    get_topbar(overlay=False, current_path="/data-sources"),
 
     html.Link(rel="stylesheet", href="/static/css/data-sources-styles.css"),
     
