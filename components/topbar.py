@@ -46,7 +46,6 @@ def get_topbar(current_path: str = "/", show_home: bool = True, overlay: bool = 
                 children=[
                     html.A(
                         "Methods ▾",
-                        href="/methods",
                         className="dropbtn active" if methods_active else "dropbtn"
                     ),
                     html.Div(
@@ -91,7 +90,6 @@ def get_topbar(current_path: str = "/", show_home: bool = True, overlay: bool = 
                 children=[
                     html.A(
                         "More ▾",
-                        href="/eda",
                         className="dropbtn active" if more_active else "dropbtn"
                     ),
                     html.Div(
