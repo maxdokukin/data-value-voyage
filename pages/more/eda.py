@@ -11,6 +11,7 @@ import numpy as np
 # from src.functions.db.fetch import fetch_bea_incomes
 # from scripts.python.data_visualization.visualize_final_goods import plot_incomes_inf_final_goods
 from components.topbar import get_topbar
+from pages.vis.quantity_affordable_vis import create_goods_price_change_heatmap_dollar_change, create_goods_price_change_heatmap_percent_change, price_change_tabs
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')
@@ -162,41 +163,29 @@ def get_income_shares_graph():
     return income_shares
 
 
-# Define the Income by Area Graph as a function
-# def get_income_by_area_graph():
-#     area_df = fetch_bea_incomes(db_path)
-
-#     regions = ["united states *", "mideast", "great lakes", "plains",
-#                "southeast", "southwest", "rocky mountain", "far west *"]
-
-#     income_area = go.Figure()
-
-#     for region in regions:
-#         filtered_data = area_df[area_df['region'] == region]
-#         income_area.add_trace(go.Scatter( 
-
-#             x=filtered_data["year"].astype(int).tolist(),
-#             y=filtered_data["average_income_unadjusted"].astype(int).tolist(),
-
-#             mode="lines",
-#             name=region
-#         ))
-
-#     income_area.update_layout(
-#         title="Regional Income Trends Over Time",
-#         xaxis_title="Year",
-#         yaxis_title="Income Value",
-#         legend_title="Regions",
-#         hovermode="x"
-#     )
-
-#     return income_area
-
 
 # Define the layout for the analysis page
 layout = dbc.Container(
     [
         get_topbar(current_path="/eda", overlay=False),
+
+        dbc.Row([
+            dbc.Col([],width=1),
+            dbc.Col([
+                html.H2("Price Change From Decade to Decade for Various Goods"),
+                html.H4("Each cell of the heatmap shows the change in price from one decade to the next."),
+             ], width=10, className="mb-4 mt-2"),
+             dbc.Col([],width=1),
+        ]),
+        dbc.Row(
+            [
+                dbc.Col([],width=1),
+                dbc.Col(
+                    price_change_tabs(), width=10
+                ),
+                dbc.Col([],width=1),
+            ]
+        ),
 
         dbc.Row(
             [
@@ -209,7 +198,7 @@ layout = dbc.Container(
                     width=5
                 ),
                 dbc.Col(
-                    dcc.Graph(id="price-trends-graph", figure=get_goods_prices_graph()),  # Call the function
+                    dcc.Graph(id="price-trends-graph", figure=get_goods_prices_graph()), 
                     width=7
                 )
             ]
@@ -255,27 +244,11 @@ layout = dbc.Container(
                     width=5
                 ),
                 dbc.Col(
-                    dcc.Graph(id="income-shares-graph", figure=get_income_shares_graph()),  # Call the function
+                    dcc.Graph(id="income-shares-graph", figure=get_income_shares_graph()), 
                     width=7
                 ),
             ]
         ),
-        dbc.Row(
-            [
-                dbc.Col(
-                    dcc.Graph(id="income-area-graph"),  # Call the function : figure=get_income_by_area_graph()
-                    width=7
-                ),
-                dbc.Col(
-                    html.Div([
-                        html.H1("Average Income by Area"),
-                        html.H2("Data Source:"),
-                        html.P("Additional context or insights related to the second graph.")
-                    ]),
-                    width=5
-                )
-            ]
-        )
     ],
     fluid=True
 )

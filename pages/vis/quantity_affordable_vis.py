@@ -3,16 +3,14 @@ import dash_bootstrap_components as dbc
 import os
 import pandas as pd
 import plotly.graph_objects as go
+from src.fetch.from_gcloud import goods_prices_df
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')
 
 #### Heatmap for Dollar Chagen #######
 
 def create_goods_price_change_heatmap_dollar_change():
 
-    csv_path = os.path.join(csv_dir, 'goods_prices.csv')
-    df = pd.read_csv(csv_path)
+    df = goods_prices_df
 
     df['date'] = pd.to_datetime(df['date'])
     df['year'] = df['date'].dt.year
@@ -72,8 +70,7 @@ def create_goods_price_change_heatmap_dollar_change():
 
 def create_goods_price_change_heatmap_percent_change():
 
-    csv_path = os.path.join(csv_dir, 'goods_prices.csv')
-    df = pd.read_csv(csv_path)
+    df = goods_prices_df
 
     df['date'] = pd.to_datetime(df['date'])
     df['year'] = df['date'].dt.year
