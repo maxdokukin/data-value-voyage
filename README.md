@@ -48,7 +48,9 @@ Offer an accessible dashboard that demystifies inflation and purchasing power, h
 ## Methodology
 
 We broke our Methodology Down into three main ideas to answer our hypothesis.
-- To Understand if Americans have greater buying power over 
+- To understand if Americans have greater buying power compared to previous decades, we wanted to look at the amount of goods a person could buy compared to their monthly income.
+- To understand if Income Inequality has been growing, shrinking or somewhere inbetween we built a statistical model to help us visualize the Gini index, which is a measure of the amount of income distributed across a population and how skewd it is away from perfect equality.
+- To understand if how much the cost of housing has changed and how much more expensive it is to own a home compared to previous decades, we compared the True cost of owning a home, as the mortgage payments + home insurrance + property taxes, to 30% of the median monthly income representing an "affordable" housing budget. Then analysed how far this gap has grown across the decades.
 
 ---
 
