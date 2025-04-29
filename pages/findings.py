@@ -7,7 +7,7 @@ from dash import callback, Output, Input
 import os
 import pandas as pd
 # Housing visuals
-from pages.vis.housing_vis import housing_sankey, housing_affordability_delta_trend
+from pages.vis.housing_vis import housing_sankey, housing_vs_budget_trend
 
 
 from components.topbar import get_topbar
@@ -156,7 +156,7 @@ layout = html.Div(className='container-findings', children=[
         html.P('A 20% down payment requirement and cumulative costs (interest, taxes, insurance) disproportionately exclude lower-income households. The gap between actual housing expenditures and the recommended 30% budget has widened, straining disposable income.'),
         dbc.Row([
             dbc.Col([dcc.Graph(figure=housing_sankey(2023))], width=6),
-            dbc.Col([dcc.Graph(figure=housing_affordability_delta_trend())], width=6)
+            dbc.Col([dcc.Graph(figure=housing_vs_budget_trend())], width=6)
         ])
     ])
 ])
