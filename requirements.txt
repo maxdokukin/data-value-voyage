@@ -27,3 +27,4 @@ dash-bootstrap-components
 gunicorn
 pandas
 google-cloud-storage
+scipy

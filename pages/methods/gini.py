@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 from components.topbar import get_topbar
 
-from pages.vis.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles, income_distplot_tabs
+from pages.vis.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles, income_distplot_tabs, multiyear_lorenz_curve
 # from src.fetch.from_gcloud import 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -384,6 +384,14 @@ layout = dbc.Container(fluid=True, children=[
         ], width=10),
         dbc.Col([],width=1),
     ], className="mb-4"),
+
+    dbc.Row([
+        dbc.Col([],width=2),
+        dbc.Col([
+            dcc.Graph(id="multiyear-lorenz-curve", figure=multiyear_lorenz_curve())
+        ], width = 8),
+        dbc.Col([],width=2)
+    ]),
 ])
 
 exprort_layout = layout

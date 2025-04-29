@@ -227,3 +227,54 @@ def income_distplot_tabs():
     dbc.Tab(dcc.Graph(figure=income_distplot_2010()), label="2010"),
     dbc.Tab(dcc.Graph(figure=income_distplot_2020()), label="2020"),
 ])
+
+
+def multiyear_lorenz_curve():
+    csv_path = os.path.join(csv_dir, 'gamma_resampling.csv')
+    df = pd.read_csv(csv_path)
+    
+    years_to_plot = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020]
+    
+    def lorenz_curve(values):
+        sorted_vals = np.sort(values)
+        cumvals = np.cumsum(sorted_vals)
+        total = cumvals[-1]
+        lorenz = np.insert(cumvals / total, 0, 0)  # prepend 0
+        x_vals = np.linspace(0, 1, len(lorenz))
+        return x_vals, lorenz
+    
+    fig = go.Figure()
+    
+    for year in years_to_plot:
+        incomes = df[df['Year'] == year]['Income Sample'].values
+        x_lorenz, y_lorenz = lorenz_curve(incomes)
+        fig.add_trace(go.Scatter(
+            x=x_lorenz,
+            y=y_lorenz,
+            mode='lines',
+            name=str(year),
+            line=dict(width=2),
+        ))
+    
+    fig.add_trace(go.Scatter(
+        x=[0, 1],
+        y=[0, 1],
+        mode='lines',
+        name='Perfect Equality',
+        line=dict(color='black', dash='dash')
+    ))
+    
+    fig.update_layout(
+        title="Lorenz Curves for Selected Years",
+        xaxis_title="Cumulative Share of Population",
+        yaxis_title="Cumulative Share of Income",
+        legend_title="Year",
+        plot_bgcolor='white',
+        hovermode='x unified',
+        height=900,
+    )
+    
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='LightGray')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightGray')
+    
+    return fig
