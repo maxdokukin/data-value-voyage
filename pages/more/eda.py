@@ -11,7 +11,7 @@ import numpy as np
 # from src.functions.db.fetch import fetch_bea_incomes
 # from scripts.python.data_visualization.visualize_final_goods import plot_incomes_inf_final_goods
 from components.topbar import get_topbar
-from pages.vis.quantity_affordable_vis import create_goods_price_change_heatmap_dollar_change, create_goods_price_change_heatmap_percent_change, price_change_tabs
+from pages.vis.quantity_affordable_vis import price_change_tabs
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')

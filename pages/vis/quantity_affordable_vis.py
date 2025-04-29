@@ -137,6 +137,17 @@ def price_change_tabs():
             dbc.Tab(
                 children=[
                     html.Div(
+                        "Percent Value Changes for Goods by Decade",
+                        style={"text-align": "center", "font-size": "16px", "color": "black"}
+                    ),
+                    dcc.Graph(figure=create_goods_price_change_heatmap_percent_change())
+                ],
+                tab_id="create_goods_price_change_heatmap_percent_change",
+                label="Percent Change"
+            ),
+            dbc.Tab(
+                children=[
+                    html.Div(
                         "Dollar Value Changes for Goods by Decade",
                         style={"text-align": "center", "font-size": "16px", "color": "black"}
                     ),
@@ -145,18 +156,7 @@ def price_change_tabs():
                 tab_id="create_goods_price_change_heatmap_dollar_change",
                 label="Dollar Change"
             ),
-            dbc.Tab(
-                children=[
-                    html.Div(
-                        "Percent Value Changes for Goods by Decade",
-                        style={"text-align": "center", "font-size": "16px", "color": "black"}
-                    ),
-                    dcc.Graph(figure=create_goods_price_change_heatmap_percent_change())
-                ],
-                tab_id="create_goods_price_change_heatmap_percent_change",
-                label="Percent Change"
-            )
         ],
         id="price-change-tabs",
-        active_tab="create_goods_price_change_heatmap_dollar_change"
+        active_tab="create_goods_price_change_heatmap_percent_change"
     )

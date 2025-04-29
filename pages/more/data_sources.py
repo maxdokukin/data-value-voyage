@@ -203,6 +203,14 @@ accordion = dbc.Accordion(
                     target="_blank",
                     style={"marginTop": "1rem"},
                 ),
+                html.H4("1965-2023, Historical Income Tables used in Income Distribution Pyramid", style={"marginBottom": "5px"}),
+                html.P("Table H-3. Mean Household Income Received by Each Fifth and Top 5 Percent : 'All Races'."),
+                html.A(
+                    "https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-income-households.html",
+                    href="https://www.census.gov/data/tables/time-series/demo/income-poverty/historical-income-households.html",
+                    target="_blank",
+                    style={"marginTop": "1rem"},
+                ),
                 dbc.Button(
                     "Open Table",
                     id="collapse-button-income",

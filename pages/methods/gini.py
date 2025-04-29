@@ -10,7 +10,8 @@ import pandas as pd
 import numpy as np
 from components.topbar import get_topbar
 
-from pages.vis.stats_analysis_vis import build_income_distribution_pyramid
+from pages.vis.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles, income_distplot_tabs
+# from src.fetch.from_gcloud import 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')
@@ -188,31 +189,26 @@ layout = dbc.Container(fluid=True, children=[
 
     # Section: Header / Introduction
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col(html.H2("Understanding Income Inequality Through Statistical Modeling"), width=11),
         dbc.Col([
             ],width=1),
         dbc.Col(html.P("This page summarizes the methodology and metrics used to quantify income inequality over time. Using the Palma Ratio, Housing Affordability Delta, and the Productivity Gap, we normalized each metric and derived Alpha and Beta parameters to simulate income distributions via a Gamma distribution. Gini coefficients and Lorenz curves offer visual and numeric validation of inequality over time."), width=10),
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
     ], className="my-4"),
     
     # Section: Lorenz Curve Interactive Plot
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col([
             dcc.Graph(id="gini-trend-plot", figure=gini_trend_fig)
         ], width=10),
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
     ]),
 
     # Section: Gini Coefficients Text + Visual Pair
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col([
             html.H3("Interpreting Gini Coefficients"),
             html.P("""
@@ -257,14 +253,12 @@ layout = dbc.Container(fluid=True, children=[
             ),
             dcc.Graph(id="lorenz-curve-plot")
         ], width=5),
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
     ], className="mb-4"),
 
     # Section: Expressing Income Inequality
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col([
             html.H3("Expressing Income Inequality"),
             html.H5("Income Inequality Metrics"),
@@ -283,28 +277,24 @@ layout = dbc.Container(fluid=True, children=[
                 We thought it was an important metric to include as it represents overall economic inequality in the US.
             """)
         ], width=10),
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
     ], className="mb-4"),
 
     # Section: Income Indquality Metrics Graphs
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col([
             dcc.Graph(id="income_inequality_metrics", figure=metrics_fig)
         ], width=5),
         dbc.Col([
             dcc.Graph(id="normalized_income_inequality_metrics", figure=norm_fig)
         ], width=5),
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
     ], className="mb-4"),
     
     # Section: Alpha and Beta Parameter Visualization
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col([
             html.H3("Gamma Distribution Parameters, Alpha and Beta"),
             html.P("An income distribution is always skewed like a Gamma Distribution — this has been consistent throughout history. We wanted to find out just how skewed and how spread the data should be using a bootstrap resampling method. As a result, we chose our Gamma parameters: Alpha and Beta, each designated with special weights according to their relevance."),
@@ -326,13 +316,11 @@ layout = dbc.Container(fluid=True, children=[
         dbc.Col([
             dcc.Graph(id="beta-trend-plot", figure=alpha_beta_fig)
         ], width=5),
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
 
     ], className="mb-5"),
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col([
             html.H3("Why the Gamma Distribution is a Fair Choice to Measure Income Distribution"),
             html.P("    ✤  We understood from our research that the Income Distribution is always skewed like a Gamma Distribution. This has been consistent throughout history. We wanted to find out just how skewed and how spread the data should be using a bootstrap resampling method. As a result, we chose our Gamma parameters: Alpha and Beta, each designated with special weights according to their relevance."),
@@ -361,20 +349,41 @@ layout = dbc.Container(fluid=True, children=[
         ])
     ], className="mb-4"),
     dbc.Row([
-        dbc.Col([
-            ],width=1),
+        dbc.Col([],width=1),
         dbc.Col([
             html.H3("Income Distribution Pyramid"),
             dcc.Graph(id="income-distribution-pyramid", figure=build_income_distribution_pyramid())
-        ], width=6),
+        ], width=5),
         dbc.Col([
             html.H3("← How to Interpret the Income Distribution Pyramid"),
             html.P("Imagine we have the income distribution for all incomes from every year in our dataset, and we devided the entire distribution into 5 pieces each representing 1/5 of the total population. For each quintile group, the value represented by each bar is the mean income for that group. The pyramid chart shows how the distribution of income has changed over time, as well as the top 5% of earners represented by the top bar."),
+            html.P("The histogram below is a visual representation of just one year of the Income Distribution Pyramid on the Left. The histogram is divided up into colors representing each one fifth of the income distribution, or the quintile groups. The dashed lines are the median value for each quintile group. These median values for each quintile group are the represented as the size of each bar for each year in the figure to the left."),
+            dcc.Graph(id="histogram_quintile_vrec", figure=income_histogram_with_quintiles()),
             html.P("The data is sourced from the U.S. Census Bureau. More about the data can be found in our data page."),
-        ], width=4),
-        dbc.Col([
-            ],width=1),
+        ], width=5),
+        dbc.Col([],width=1),
     ], className="mb-5"),
+
+    dbc.Row([
+        dbc.Col([],width=1),
+        dbc.Col([
+            html.H3("Verifying our Bootstrap Resampling Merhod Produced Accurate and Reasonable Results."),
+            html.P("We used a bootstrap resampling method to generate 1000 samples of income data for each year in our dataset, and calculated the Gini coefficient for each sample."),
+            html.P("But we cant just assume the resampling method will be a perfect representation of the actual data. What we can do is compare how closely each resampled quintle values fall to the actual quintile values from the census bureau data."),
+            html.H4("A selecting a few years to visualize the income distribution. 1940 - 2020"),
+            income_distplot_tabs(),
+        ], width=10),
+        dbc.Col([],width=1),
+    ], className="mb-4"),
+
+    dbc.Row([
+        dbc.Col([],width=1),
+        dbc.Col([
+            html.H3("Insight from these disrtibutions"),
+            html.P("The first thing we can derive from these income distributions is that the most recent years, after 2020 are much more accurate compared to the years from 1940 - 1980. We can clearly see the differences in shape between each distribution, caused by each of our three main parameters, Palma Ratio, Housing Affordability Delta, and Productivity / Pay gap Delta, parameters. In fact the bootstrap resampling almost perfectly aligns with true values for the most recent years, so if anything that should tell us that our Gini Coefficient for the last 2-3 decades is a fair estimate based on our statistical model we developed."),
+        ], width=10),
+        dbc.Col([],width=1),
+    ], className="mb-4"),
 ])
 
 exprort_layout = layout
