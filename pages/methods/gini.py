@@ -11,6 +11,7 @@ import numpy as np
 from components.topbar import get_topbar
 
 from pages.vis.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles, income_distplot_tabs, multiyear_lorenz_curve
+from pages.vis.analysis_vis import gini_eda_tabs
 # from src.fetch.from_gcloud import 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -392,6 +393,18 @@ layout = dbc.Container(fluid=True, children=[
         ], width = 8),
         dbc.Col([],width=2)
     ]),
+
+    dbc.Row([
+            dbc.Col([],width=1),
+            dbc.Col([
+                html.H2("Gini Coefficient Analysis About US Presidents, Wartime Events, and Major Economic Recessions."),
+                html.H3("The Gini Coefficient is a measure of income inequality within a population, but it is also a lagging indicator, meaning it reflects past events rather than current conditions."),
+                html.Li("The US Presidents don't seem to have a significant impact on the Gini Coefficient, there is no notable trend between Republic (red blocks) and Democrat (blue blocks) presidents."),
+                html.Li("The Wartime events seem to have a more obvious impact on the Gini Coefficient, especially around WWII, The Korean War and the Vietnam War."),
+                html.Li("Major Economic Recessions don't seem to have a significant impact on the Gini Coefficnent.", className="mb-4"),
+                gini_eda_tabs()
+            ], width=10,)
+        ], className="mb-4 mt-3"),
 ])
 
 exprort_layout = layout

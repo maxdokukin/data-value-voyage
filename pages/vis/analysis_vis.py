@@ -11,6 +11,142 @@ from dash import dcc
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR,'..','..', 'data', 'csv')
 
+def get_goods_prices_graph():
+    csv_path = os.path.join(csv_dir, 'goods_prices.csv')
+    df = pd.read_csv(csv_path)
+
+    # Filter to selected goods only
+    selected_goods = ['bacon', 'bread', 'butter', 'coffee', 'eggs', 'flour', 'milk', 'pork chop', 'round steak', 'sugar', 'gas']
+    df = df[df['name'].isin(selected_goods)]
+
+    df['Year'] = df['date'].str.slice(0, 7)
+    df['price'] = pd.to_numeric(df['price'], errors='coerce')
+    df = df.sort_values(by=['name', 'Year'])
+    df['price'] = df.groupby('name')['price'].transform(lambda group: group.interpolate(method='linear'))
+
+    fig = go.Figure()
+
+    for good in df['name'].unique():
+        subset = df[df['name'] == good]
+        legend_name = f"{good} /{subset['good_unit'].iloc[0]}"
+        x_vals = subset['Year'].astype(str).tolist()
+        y_vals = np.round(subset['price'].astype(float), 2).tolist()
+
+        fig.add_trace(go.Scatter(
+            x=x_vals,
+            y=y_vals,
+            mode='lines',
+            name=legend_name,
+            hovertemplate=legend_name + ": %{y}<extra></extra>"
+        ))
+
+    fig.update_layout(
+        title="Price Trends Over Time",
+        xaxis_title="Year-Month",
+        yaxis_title="Price",
+        hovermode="x unified"
+    )
+    return fig
+
+def get_goods_prices_graph_after_1970():
+    csv_path = os.path.join(csv_dir, 'goods_prices.csv')
+    df = pd.read_csv(csv_path)
+
+    # Filter to selected goods only
+    selected_goods = ['bacon', 'bread', 'butter', 'coffee', 'eggs', 'flour', 'milk', 'pork chop', 'round steak', 'sugar', 'gas']
+    df = df[df['name'].isin(selected_goods)]
+
+    df['Year'] = df['date'].str.slice(0, 7)
+    df = df[df['Year'].astype(str).str[:4].astype(int) >= 1980]
+    df['price'] = pd.to_numeric(df['price'], errors='coerce')
+    df = df.sort_values(by=['name', 'Year'])
+    df['price'] = df.groupby('name')['price'].transform(lambda group: group.interpolate(method='linear'))
+
+    fig = go.Figure()
+
+    for good in df['name'].unique():
+        subset = df[df['name'] == good]
+        legend_name = f"{good} /{subset['good_unit'].iloc[0]}"
+        x_vals = subset['Year'].astype(str).tolist()
+        y_vals = np.round(subset['price'].astype(float), 2).tolist()
+
+        fig.add_trace(go.Scatter(
+            x=x_vals,
+            y=y_vals,
+            mode='lines',
+            name=legend_name,
+            hovertemplate=legend_name + ": %{y}<extra></extra>"
+        ))
+
+    fig.update_layout(
+        title="Price Trends Over Time After 1980",
+        xaxis_title="Year-Month",
+        yaxis_title="Price",
+        hovermode="x unified"
+    )
+    return fig
+
+def get_affordable_goods_graph():
+    csv_path = os.path.join(csv_dir, 'affordable_goods.csv')
+    df = pd.read_csv(csv_path)
+
+    goods = ['bacon', 'bread', 'butter', 'coffee', 'eggs', 'flour', 'milk', 'pork chop', 'round steak', 'sugar']
+    df = df[df['good_name'].isin(goods)]
+
+    fig = go.Figure()
+
+    for good in df['good_name'].unique():
+        subset = df[df['good_name'] == good]
+        legend_name = f"{good} /{subset['good_unit'].iloc[0]}"
+        x_vals = subset['year'].astype(str).tolist()
+        y_vals = subset['affordable_monthly_quantity'].astype(int).tolist()
+        fig.add_trace(go.Scatter(
+            x=x_vals,
+            y=y_vals,
+            mode='lines',
+            name=legend_name,
+            hovertemplate=legend_name + ": %{y}<extra></extra>"
+        ))
+
+    fig.update_layout(
+        title="Affordable Quantity of Goods per Month",
+        xaxis_title="Year-Month",
+        yaxis_title="Affordable Monthly Quantity",
+        hovermode="x unified"
+    )
+    return fig
+
+def get_affordable_goods_graph_no_flower_sugar_after1980():
+    csv_path = os.path.join(csv_dir, 'affordable_goods.csv')
+    df = pd.read_csv(csv_path)
+
+    df = df[df['year'].str[:4].astype(int) >= 1980]
+    goods = ['bacon', 'bread', 'butter', 'coffee', 'eggs', 'milk', 'pork chop', 'round steak', 'gas']
+    df = df[df['good_name'].isin(goods)]
+
+    fig = go.Figure()
+
+    for good in df['good_name'].unique():
+        subset = df[df['good_name'] == good]
+        legend_name = f"{good} /{subset['good_unit'].iloc[0]}"
+        x_vals = subset['year'].astype(str).tolist()
+        y_vals = subset['affordable_monthly_quantity'].astype(int).tolist()
+        fig.add_trace(go.Scatter(
+            x=x_vals,
+            y=y_vals,
+            mode='lines',
+            name=legend_name,
+            hovertemplate=legend_name + ": %{y}<extra></extra>"
+        ))
+
+    fig.update_layout(
+        title="Affordable Quantity of Goods per Month After 1980 (No Flour or Sugar)",
+        xaxis_title="Year-Month",
+        yaxis_title="Affordable Monthly Quantity",
+        hovermode="x unified"
+    )
+    return fig
+
 def presidents_gini_plot():
     # Load Gini data
     csv_path = os.path.join(csv_dir, 'gini_year.csv')
@@ -74,7 +210,9 @@ def presidents_gini_plot():
         yaxis_title="Gini Coefficient",
         xaxis=dict(
             tickangle=50,
-            range=[1912, 2024]
+            range=[1912, 2024],
+            tickmode='array',
+            tickvals=list(range(1915, 2025, 5))
         ),
         yaxis=dict(
             autorange=False,
@@ -152,7 +290,7 @@ def war_gini_plot():
             tickangle=50,
             range=[1912, 2024],
             tickmode='array',
-            tickvals=list(range(1920, 2025, 10))
+            tickvals=list(range(1915, 2025, 5))
         ),
         yaxis=dict(
             autorange=False,
@@ -176,8 +314,95 @@ def war_gini_plot():
     
     return fig
 
+def recession_gini_plot():
+    # Load Gini data
+    csv_path = os.path.join(csv_dir, 'gini_year.csv')
+    gini_trend_df = pd.read_csv(csv_path)
+    
+    # US Recessions (1913-2023) - Based on NBER data
+    recessions = [
+        {'name': 'Post-WWI Recession', 'start': 1918, 'end': 1919, 'color': 'lightcoral'},
+        {'name': 'Great Depression', 'start': 1929, 'end': 1933, 'color': 'indianred'},
+        {'name': '1937-38 Recession', 'start': 1937, 'end': 1938, 'color': 'rosybrown'},
+        {'name': 'Post-WWII Recession', 'start': 1945, 'end': 1947, 'color': 'lightpink'},
+        {'name': '1953 Recession', 'start': 1953, 'end': 1954, 'color': 'salmon'},
+        {'name': '1958 Recession', 'start': 1957, 'end': 1958, 'color': 'darksalmon'},
+        {'name': '1960-61 Recession', 'start': 1960, 'end': 1961, 'color': 'tomato'},
+        {'name': '1969-70 Recession', 'start': 1969, 'end': 1970, 'color': 'orangered'},
+        {'name': '1973-75 Recession', 'start': 1973, 'end': 1975, 'color': 'firebrick'},
+        {'name': '1980-82 Recessions', 'start': 1980, 'end': 1982, 'color': 'crimson'},
+        {'name': 'Early 1990s Recession', 'start': 1990, 'end': 1991, 'color': 'red'},
+        {'name': 'Dot-com Bubble', 'start': 2001, 'end': 2001, 'color': 'darkred'},
+        {'name': 'Great Recession', 'start': 2007, 'end': 2009, 'color': 'maroon'},
+        {'name': 'COVID-19 Recession', 'start': 2020, 'end': 2020, 'color': 'palevioletred'}
+    ]
+    
+    # Create figure
+    fig = go.Figure()
+    
+    # Add Gini coefficient line first
+    fig.add_trace(go.Scatter(
+        x=gini_trend_df["Year"].astype(int).tolist(),
+        y=gini_trend_df["Gini Coefficient"].astype(float).tolist(),
+        mode="lines+markers",
+        line=dict(color="grey", width=2),
+        marker=dict(size=4),
+        name="Gini Coefficient",
+        hovertemplate="Year: %{x}<br>Gini: %{y:.3f}<extra></extra>"
+    ))
+    
+    # Add recession rectangles with different red shades
+    for recession in recessions:
+        fig.add_vrect(
+            x0=recession['start'],
+            x1=recession['end'],
+            fillcolor=recession['color'],
+            opacity=0.3,
+            layer='below',
+            line_width=0,
+            annotation_text=recession['name'],
+            annotation_position='top left',
+            annotation_font_size=10,
+            annotation_textangle=-90
+        )
+    
+    # Update layout
+    fig.update_layout(
+        title="Gini Coefficient During US Economic Recessions (1913-2023)",
+        xaxis_title="Year",
+        yaxis_title="Gini Coefficient",
+        xaxis=dict(
+            tickangle=50,
+            range=[1912, 2024],
+            tickmode='array',
+            tickvals=list(range(1915, 2025, 5))
+        ),
+        yaxis=dict(
+            autorange=False,
+            range=[
+                gini_trend_df["Gini Coefficient"].min() - 0.02,
+                gini_trend_df["Gini Coefficient"].max() + 0.02
+            ]
+        ),
+        template="plotly_white",
+        hovermode="x unified",
+        showlegend=True,
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        ),
+        height=600,
+    )
+    
+    return fig
+
+
 def gini_eda_tabs():
     return dbc.Tabs([
-    dbc.Tab(dcc.Graph(figure=presidents_gini_plot()), label="Presidents - Gini Coefficient Plot"),
-    dbc.Tab(dcc.Graph(figure=war_gini_plot()), label="Wartime - Gini Coefficient Plot"),
+    dbc.Tab(dcc.Graph(figure=presidents_gini_plot()), label="Presidents"),
+    dbc.Tab(dcc.Graph(figure=war_gini_plot()), label="Wartime"),
+    dbc.Tab(dcc.Graph(figure=recession_gini_plot()), label="Recessions"),
 ])
