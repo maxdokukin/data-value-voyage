@@ -10,3 +10,4 @@ doc/figures/.DS_Store
 scripts/python/.DS_Store
 data/db/.DS_Store
 ahan.txt
+.vscode/settings.json

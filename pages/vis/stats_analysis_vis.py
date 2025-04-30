@@ -278,3 +278,36 @@ def multiyear_lorenz_curve():
     fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='LightGray')
     
     return fig
+
+def create_gini_trend_plot():
+    csv_path = os.path.join(csv_dir, 'gini_year.csv')
+    gini_trend_df = pd.read_csv(csv_path)
+    
+    fig = go.Figure(
+        data=go.Scatter(
+            x=gini_trend_df["Year"].astype(str).tolist(),
+            y=gini_trend_df["Gini Coefficient"].astype(float).tolist(),
+            mode="lines+markers",
+            line=dict(color="orange", width=2),
+            marker=dict(size=4),
+            name="Gini Coefficient"
+        )
+    )
+
+    fig.update_layout(
+        title="Gini Coefficient (inequality coefficient) Over Time",
+        xaxis_title="Year",
+        yaxis_title="Gini Coefficient",
+        xaxis=dict(tickangle=50),
+        yaxis=dict(
+            autorange=False,
+            range=[
+                gini_trend_df["Gini Coefficient"].min() - 0.02,
+                gini_trend_df["Gini Coefficient"].max() + 0.02
+            ]
+        ),
+        template="plotly_white",
+        hovermode="x",
+    )
+    
+    return fig
