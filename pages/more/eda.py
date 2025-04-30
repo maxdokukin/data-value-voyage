@@ -12,6 +12,7 @@ import numpy as np
 # from scripts.python.data_visualization.visualize_final_goods import plot_incomes_inf_final_goods
 from components.topbar import get_topbar
 from pages.vis.quantity_affordable_vis import price_change_tabs
+from pages.vis.analysis_vis import gini_eda_tabs
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')
@@ -176,7 +177,7 @@ layout = dbc.Container(
                 html.H4("Each cell of the heatmap shows the change in price from one decade to the next."),
              ], width=10, className="mb-4 mt-2"),
              dbc.Col([],width=1),
-        ]),
+        ], className="mt-4"),
         dbc.Row(
             [
                 dbc.Col([],width=1),
@@ -187,6 +188,14 @@ layout = dbc.Container(
             ]
         ),
 
+        dbc.Row([
+            dbc.Col([],width=1),
+            dbc.Col([
+                html.H2("Gini Coefficient Analysis About US Presidents and Wartime Events"),
+                gini_eda_tabs()
+            ], width=10,)
+        ], className="mb-4 mt-3"),
+        
         dbc.Row(
             [
                 dbc.Col(
@@ -249,6 +258,7 @@ layout = dbc.Container(
                 ),
             ]
         ),
+
     ],
     fluid=True
 )
