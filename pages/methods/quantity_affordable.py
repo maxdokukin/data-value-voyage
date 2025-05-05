@@ -92,66 +92,99 @@ comparison_records = sorted(comparison_records, key=lambda x: x['% Change'], rev
 
 # Layout definition
 layout = dbc.Container(fluid=True, children=[
-    # Topbar
+    # Topbar + stylesheet
     get_topbar(current_path='/methods/quantity-affordable', overlay=False),
     html.Link(rel='stylesheet', href='/static/css/methods-styles.css'),
 
-    # Header / Introduction
-    dbc.Row([
-        dbc.Col(width=1),
-        dbc.Col(html.H2('Quantifying Purchasing Power via CPI-to-Good Conversion'), width=10),
-        dbc.Col(width=1),
-        dbc.Col(html.P(
-            'This page details how we transformed CPI indices into tangible units of everyday goods and computed the number of units an average consumer could afford each month from 1900 to 2020 (10-year intervals).'
-        ), width=10),
-        dbc.Col(width=1),
-    ], className='my-4'),
+    # Intro Section
+    html.Div(className='section', children=[
+        html.H2(
+            'Quantifying Purchasing Power via CPI-to-Good Conversion',
+            className='section__title'
+        ),
+        html.P(
+            'This page details how we transformed CPI indices into tangible units of everyday goods '
+            'and computed the number of units an average consumer could afford each month '
+            'from 1900 to 2020 (10-year intervals).',
+            className='section__description'
+        )
+    ]),
 
     # Goods Price Trends
-    dbc.Row([
-        dbc.Col(width=1),
-        dbc.Col(dcc.Graph(id='goods-price-trends', figure=fig_goods), width=10),
-        dbc.Col(width=1),
-    ], className='mb-4'),
+    html.Div(className='section', children=[
+        html.H3('Goods Price Trends', className='section__title'),
+        html.P(
+            'CPI-based prices for a basket of goods, shown in 10-year snapshots.',
+            className='section__description'
+        ),
+        dbc.Row([
+            dbc.Col(width=1),
+            dbc.Col(dcc.Graph(id='goods-price-trends', figure=fig_goods), width=10),
+            dbc.Col(width=1),
+        ])
+    ]),
 
     # Income Trends
-    dbc.Row([
-        dbc.Col(width=1),
-        dbc.Col(dcc.Graph(id='income-trends', figure=fig_income), width=10),
-        dbc.Col(width=1),
-    ], className='mb-4'),
+    html.Div(className='section', children=[
+        html.H3('Income Trends', className='section__title'),
+        html.P(
+            'Average monthly incomes from IRS, BEA, and FRED, plotted on a log scale.',
+            className='section__description'
+        ),
+        dbc.Row([
+            dbc.Col(width=1),
+            dbc.Col(dcc.Graph(id='income-trends', figure=fig_income), width=10),
+            dbc.Col(width=1),
+        ])
+    ]),
 
     # Calculation Formula
-    dbc.Row([
-        dbc.Col(width=1),
-        dbc.Col(html.H3('Calculating Quantity Affordable'), width=10),
-        dbc.Col(width=1),
-        dcc.Markdown('''
+    html.Div(className='section', children=[
+        html.H3('Calculating Quantity Affordable', className='section__title'),
+        dcc.Markdown(
+            '''
             $$
-            \\text{quantity_affordable}_{\\text{ year}} = \\frac{\\text{average_monthly_income}_{\\text{ year}}}{\\text{good_price}_{\\text{ year}}}
+            \\text{quantity_affordable}_{\\text{year}}
+            = \\frac{\\text{average_monthly_income}_{\\text{year}}}{\\text{good_price}_{\\text{year}}}
             $$
-            ''', mathjax=True),
-        dbc.Col(width=1),
-    ], className='mb-4'),
+            ''',
+            mathjax=True,
+            className='section__description'
+        )
+    ]),
 
     # Quantity Affordable Trends
-    dbc.Row([
-        dbc.Col(width=1),
-        dbc.Col(dcc.Graph(id='quantity-affordable-trends', figure=fig_quantity), width=10),
-        dbc.Col(width=1),
-    ], className='mb-4'),
+    html.Div(className='section', children=[
+        html.H3('Quantity Affordable Trends', className='section__title'),
+        html.P(
+            'How many units of each good an average earner could buy per month, 1900–2020.',
+            className='section__description'
+        ),
+        dbc.Row([
+            dbc.Col(width=1),
+            dbc.Col(dcc.Graph(id='quantity-affordable-trends', figure=fig_quantity), width=10),
+            dbc.Col(width=1),
+        ])
+    ]),
 
     # Affordability Comparison Table
-    dbc.Row([
-        dbc.Col(width=1),
-        dbc.Col(dash_table.DataTable(
-            id='affordability-table',
-            columns=[{'name': c, 'id': c} for c in comparison_records[0].keys()],
-            data=comparison_records,
-            style_table={'width': '100%'},
-            style_cell={'padding': '8px', 'textAlign': 'left'},
-            style_header={'fontWeight': 'bold', 'backgroundColor': '#f4f4f4'}
-        ), width=10),
-        dbc.Col(width=1),
-    ], className='mb-5'),
+    html.Div(className='section', children=[
+        html.H3('1920s vs 2020s Affordability Comparison', className='section__title'),
+        html.P(
+            'Average monthly units affordable in the 1920s compared to the 2020s, with % change.',
+            className='section__description'
+        ),
+        dbc.Row([
+            dbc.Col(width=1),
+            dbc.Col(dash_table.DataTable(
+                id='affordability-table',
+                columns=[{'name': c, 'id': c} for c in comparison_records[0].keys()],
+                data=comparison_records,
+                style_table={'width': '100%'},
+                style_cell={'padding': '8px', 'textAlign': 'left'},
+                style_header={'fontWeight': 'bold', 'backgroundColor': '#f4f4f4'}
+            ), width=10),
+            dbc.Col(width=1),
+        ])
+    ])
 ])

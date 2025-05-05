@@ -1,19 +1,12 @@
-/* Objective‑specific palettes  ----------------------------------- */
-.primary-objective      { --accent: #1e88e5; }   /* blue   */
-.secondary-objectives   { --accent: #e65100; }   /* orange */
-.broader-impact         { --accent: #6a1b9a; }   /* purple */
-
- /*Shared rules for all objective sections -----------------------*/
 .section {
-  border-left: 4px solid var(--accent);
   /*margin-bottom: 2rem;*/
     padding: 30px;
-    background: antiquewhite;
+    background: whitesmoke;
+  border-radius: 30px;
 }
 
 .section__title {
-  color: var(--accent);
-  font-size: 1.4rem;
+  font-size: 1.75rem;
   margin: 0 0 0.5rem;
 }
 
