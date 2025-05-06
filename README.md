@@ -98,17 +98,14 @@ The delta between monthly housing costs (mortgage + taxes + insurance) and the r
 
 ## Findings
 
-By dividing average monthly income by CPI-based prices for a basket of goods, we measured how many units an average consumer could afford per month. Comparing the 1920s to the 2020s shows declines across all items.
+**Purchasing Power Findings**
+By dividing average monthly income by CPI-adjusted prices for a standardized basket of goods, we can see how many units an average consumer could afford per month in the 1920s versus the 2020s. Contrary to the notion that basic staples have become more expensive relative to income, the ability to purchase both eggs and bread has actually soared over the past century. In the 1920s, an average household could afford roughly 110 dozen eggs each month; by the 2020s, that figure has climbed to about 2,474 dozen, representing a more than 2,100 percent increase in egg-purchasing power. Likewise, the number of one-pound loaves of bread purchasable with an average monthly income rose from approximately 648 to 3,237, a nearly 400 percent gain.
 
-Flour and sugar affordability dropped by over 90%, eggs fell ~13%, pork chops and bacon by ~40–45%, milk by ~57%, and butter became effectively unaffordable.
+**Income Inequality Findings**
+We quantified income distribution from 1900 through 2020 using Lorenz curves and Gini coefficients. Over that period, the Gini coefficient increased from around 0.45 to about 0.49, signaling a clear uptick in inequality. To capture changes in the distribution’s shape, we converted normalized metrics—such as the Palma ratio, a housing-cost gap indicator, and a productivity-gap measure—into the alpha and beta parameters of a Gamma distribution. The resulting shifts in those parameters reveal a steadily growing right skew and wider dispersion, underscoring that income gains are increasingly concentrated among higher-earning households.
 
-Using Lorenz curves and Gini coefficients, income distribution was quantified from 1900 to 2020. The Gini rose from ~0.45 to >0.49, indicating growing inequality.
-
-Normalized metrics (Palma Ratio, Housing Delta, Productivity Gap) served as alpha/beta parameters in a Gamma distribution, revealing increasing skew and dispersion over time.
-
-Our housing analysis combined Sankey diagrams, budget trend charts, and affordability delta metrics to assess structural barriers in homeownership.
-
-A 20% down payment requirement and cumulative costs (interest, taxes, insurance) disproportionately exclude lower-income households. The gap between actual housing expenditures and the recommended 30% budget has widened, straining disposable income.
+**Housing Affordability Findings**
+Our housing analysis—incorporating Sankey diagrams, multi-decade budget-trend charts, and “affordability delta” metrics—highlights structural barriers faced by would-be homeowners. A standard 20 percent down-payment requirement, together with the cumulative burden of mortgage interest, property taxes, and insurance, effectively excludes many lower-income families. At the same time, the share of household income devoted to housing has drifted well above the 30 percent benchmark commonly viewed as sustainable, squeezing disposable income and intensifying financial strain.
 
 ---
 
