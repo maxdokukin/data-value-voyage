@@ -58,6 +58,7 @@ We broke our Methodology Down into three main ideas to answer our hypothesis.
 This page details how we transformed CPI indices into tangible units of everyday goods and computed the number of units an average consumer could afford each month from 1900 to 2020 (10-year intervals).
 <p align="center">
   <img width="854" alt="Screenshot 2025-04-29 at 2 48 15 PM" src="https://github.com/user-attachments/assets/f05ccc32-bebb-4ba6-9331-223db3911848" />
+  <img width="854" alt="Screenshot 2025-05-06 at 15 04 43" src="https://github.com/user-attachments/assets/f88216d5-8efa-4d65-b9d6-c064d419b151" />
 </p>
 
 ---
