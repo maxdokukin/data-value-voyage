@@ -1,6 +1,6 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-from pages.vis.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles
+from src.visualize.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles
 
 layout = html.Div(className="section-slide", children=[
     dbc.Container(fluid=True, children=[

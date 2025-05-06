@@ -10,8 +10,8 @@ import pandas as pd
 import numpy as np
 from components.topbar import get_topbar
 
-from pages.vis.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles, income_distplot_tabs, multiyear_lorenz_curve
-from pages.vis.analysis_vis import gini_eda_tabs
+from src.visualize.stats_analysis_vis import build_income_distribution_pyramid, income_histogram_with_quintiles, income_distplot_tabs, multiyear_lorenz_curve
+from src.visualize.analysis_vis import gini_eda_tabs
 # from src.fetch.from_gcloud import 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

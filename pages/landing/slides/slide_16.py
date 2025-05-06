@@ -1,6 +1,6 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-from pages.vis.housing_vis import housing_vs_budget_trend
+from src.visualize.housing_vis import housing_vs_budget_trend
 from components.button import get_button
 
 layout = html.Div(className="section-slide", children=[

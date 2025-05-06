@@ -1,18 +1,13 @@
 # pages/eda.py
-import dash
 from dash import dcc, html
-import pandas as pd
-import plotly.graph_objects as go
 import dash_bootstrap_components as dbc
-import sqlite3
 import os
-import numpy as np
 # from src.functions.db.fetch import fetch_goods_prices
 # from src.functions.db.fetch import fetch_bea_incomes
 # from scripts.python.data_visualization.visualize_final_goods import plot_incomes_inf_final_goods
 from components.topbar import get_topbar
-from pages.vis.quantity_affordable_vis import price_change_tabs
-from pages.vis.analysis_vis import gini_eda_tabs, get_goods_prices_graph, get_goods_prices_graph_after_1970, get_affordable_goods_graph, get_affordable_goods_graph_no_flower_sugar_after1980
+from src.visualize.quantity_affordable_vis import price_change_tabs
+from src.visualize.analysis_vis import gini_eda_tabs, get_goods_prices_graph, get_goods_prices_graph_after_1970, get_affordable_goods_graph, get_affordable_goods_graph_no_flower_sugar_after1980
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')

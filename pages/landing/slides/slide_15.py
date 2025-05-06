@@ -1,6 +1,6 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-from pages.vis.housing_vis import housing_sankey, income_affordability_sankey
+from src.visualize.housing_vis import housing_sankey, income_affordability_sankey
 
 layout = html.Div(className="section-slide", children=[
     dbc.Container(fluid=True, children=[

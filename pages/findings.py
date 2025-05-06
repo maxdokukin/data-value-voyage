@@ -1,13 +1,10 @@
 from dash import html, dash_table, dcc
 import dash_bootstrap_components as dbc
-from src.fetch.from_csv import fetch_final_goods_affordable
-from components.topbar import get_topbar
 import plotly.graph_objects as go
-from dash import callback, Output, Input
 import os
 import pandas as pd
 # Housing visuals
-from pages.vis.housing_vis import housing_sankey, housing_vs_budget_trend
+from src.visualize.housing_vis import housing_sankey, housing_vs_budget_trend
 
 
 from components.topbar import get_topbar

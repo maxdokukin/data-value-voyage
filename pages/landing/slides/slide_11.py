@@ -1,6 +1,6 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-from pages.vis.stats_analysis_vis import multiyear_lorenz_curve
+from src.visualize.stats_analysis_vis import multiyear_lorenz_curve
 
 layout = html.Div(className="section-slide", children=[
     dbc.Container(fluid=True, children=[ 

@@ -2,7 +2,7 @@ from dash import dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
 import pandas as pd
 import os
-from pages.vis.housing_vis import housing_sankey, income_affordability_sankey, housing_vs_budget_trend, housing_affordability_delta_trend
+from src.visualize.housing_vis import housing_sankey, housing_vs_budget_trend, housing_affordability_delta_trend
 from components.topbar import get_topbar
 
 
@@ -148,7 +148,7 @@ def update_graph(selected_year):
     Input('year-slider', 'value')
 )
 def update_income_graph(selected_year):
-    from pages.vis.housing_vis import income_affordability_sankey
+    from src.visualize.housing_vis import income_affordability_sankey
     return income_affordability_sankey(selected_year)
 
 exprort_layout = layout

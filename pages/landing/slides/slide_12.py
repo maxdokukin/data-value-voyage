@@ -1,6 +1,6 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-from pages.vis.stats_analysis_vis import create_gini_trend_plot
+from src.visualize.stats_analysis_vis import create_gini_trend_plot
 from components.button import get_button
 
 layout = html.Div(className="section-slide", children=[

@@ -1,6 +1,6 @@
-from dash import html, dcc
+from dash import html
 import dash_bootstrap_components as dbc
-from pages.vis.analysis_vis import gini_eda_tabs
+from src.visualize.analysis_vis import gini_eda_tabs
 
 layout = html.Div(className="section-slide", children=[
     dbc.Container(fluid=True, children=[
