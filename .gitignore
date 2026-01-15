@@ -12,3 +12,4 @@ data/db/.DS_Store
 ahan.txt
 .vscode/settings.json
 .idea/
+.venv/
