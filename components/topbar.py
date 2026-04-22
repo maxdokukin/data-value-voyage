@@ -43,8 +43,9 @@ def get_topbar(current_path: str = "/", show_home: bool = True, overlay: bool = 
             # Methods dropdown
             html.Div(
                 className="dropdown",
+                tabIndex=0,  # CRITICAL FIX: Makes the div focusable for touch devices
                 children=[
-                    html.A(
+                    html.Span(
                         "Methods ▾",
                         className="dropbtn active" if methods_active else "dropbtn"
                     ),
@@ -87,8 +88,9 @@ def get_topbar(current_path: str = "/", show_home: bool = True, overlay: bool = 
             # More dropdown
             html.Div(
                 className="dropdown",
+                tabIndex=0,  # CRITICAL FIX: Makes the div focusable for touch devices
                 children=[
-                    html.A(
+                    html.Span(
                         "More ▾",
                         className="dropbtn active" if more_active else "dropbtn"
                     ),

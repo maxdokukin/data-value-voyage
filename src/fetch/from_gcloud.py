@@ -1,19 +1,19 @@
 # funcitons to fetch data from gcloud
 
 import pandas as pd
-from google.cloud import storage
-from io import BytesIO
-
-BUCKET_NAME = "value-voyage-cs163.appspot.com"
-
-storage_client = storage.Client()
+# from google.cloud import storage
+# from io import BytesIO
+#
+# BUCKET_NAME = "value-voyage-cs163.appspot.com"
+#
+# storage_client = storage.Client()
 
 def load_csv_from_gcs(filename):
     """Load a single CSV file from GCS into a Pandas DataFrame."""
-    bucket = storage_client.bucket(BUCKET_NAME)
-    blob = bucket.blob(filename)
-    data = blob.download_as_bytes()
-    df = pd.read_csv(BytesIO(data))
+    # bucket = storage_client.bucket(BUCKET_NAME)
+    # blob = bucket.blob(filename)
+    # data = blob.download_as_bytes()
+    df = pd.read_csv("/Users/max/Codebase/github/data-value-voyage/data/csv/"+filename)
     return df
 
 affordable_goods_df = load_csv_from_gcs("affordable_goods.csv")
