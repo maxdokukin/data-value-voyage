@@ -3,10 +3,6 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
-import src.fetch.from_gcloud as gamma_resampling_df
-import plotly.figure_factory as ff
-import dash_bootstrap_components as dbc
-from dash import dcc
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR,'..','..', 'data', 'csv')
@@ -398,11 +394,3 @@ def recession_gini_plot():
     )
     
     return fig
-
-
-def gini_eda_tabs():
-    return dbc.Tabs([
-    dbc.Tab(dcc.Graph(figure=presidents_gini_plot()), label="Presidents"),
-    dbc.Tab(dcc.Graph(figure=war_gini_plot()), label="Wartime"),
-    dbc.Tab(dcc.Graph(figure=recession_gini_plot()), label="Recessions"),
-])

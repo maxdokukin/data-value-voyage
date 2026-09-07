@@ -1,0 +1,19 @@
+<div class="section-slide">
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-6">
+                <div id="income-distribution-pyramid"></div>
+                <script type="application/json" id="income-distribution-pyramid-data">{{ income_pyramid_fig_json|safe }}</script>
+            </div>
+            <div class="col-6">
+                <div id="histogram_quintile_vrec"></div>
+                <script type="application/json" id="histogram_quintile_vrec-data">{{ income_histogram_fig_json|safe }}</script>
+                <h2 class="mt-3">Income Distribution Pyramid and Sample Distribution Histogram</h2>
+                <p>The Result of our Boostrap Resampling is a income Distribution for every year based on three main parameters.</p>
+                <li>The Palma Ratio</li>
+                <li>The Housing Affordability Gap</li>
+                <li>The Productivity Pay Gap</li>
+            </div>
+        </div>
+    </div>
+</div>

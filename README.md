@@ -30,7 +30,7 @@ An interactive dashboard that brings Consumer Price Index (CPI) and purchasing-p
 
 3**Run the app locally**  
    ```bash
-   python app.py
+   uvicorn main:app --reload --port 5000
    ```
    Then visit <http://localhost:5000> in your browser.
 

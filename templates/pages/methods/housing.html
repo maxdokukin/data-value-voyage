@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as macros %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/methods-styles.css">
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    {{ macros.topbar(current_path="/methods/housing", overlay=False) }}
+
+    <h4 class="mt-4">Housing Cost Sankey Diagram</h4>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 mt-4">
+            <div id="sankey-graph"></div>
+            <script type="application/json" id="sankey-graph-data">{{ housing_sankey_fig_json|safe }}</script>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 mt-4">
+            <input type="range" class="form-range" id="year-slider" name="year"
+                   min="{{ years[0] }}" max="{{ years[-1] }}" step="1" value="{{ default_year }}"
+                   hx-get="/methods/housing/sankey" hx-trigger="input changed delay:100ms" hx-swap="none"
+                   data-plotly-target="sankey-graph"
+                   oninput="document.getElementById('year-slider-label').textContent = this.value">
+            <span id="income-sankey-trigger" hx-get="/methods/housing/income-sankey"
+                  hx-trigger="input delay:100ms from:#year-slider" hx-include="#year-slider"
+                  hx-swap="none" data-plotly-target="income-sankey-graph" style="display:none"></span>
+            <div class="text-center">Year: <span id="year-slider-label">{{ default_year }}</span></div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div id="income-sankey-graph"></div>
+            <script type="application/json" id="income-sankey-graph-data">{{ income_sankey_fig_json|safe }}</script>
+        </div>
+        <div class="col-6 mt-4">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#housing-budget-trends" type="button" role="tab">Housing Budget Trends</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#housing-affordability-delta" type="button" role="tab">Affordability Delta</button></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="housing-budget-trends" role="tabpanel">
+                    <div style="text-align:center; font-size:16px; color:black;">Housing Budget Trends</div>
+                    <div id="housing-budget-trends-fig"></div>
+                    <script type="application/json" id="housing-budget-trends-fig-data">{{ housing_budget_trend_fig_json|safe }}</script>
+                </div>
+                <div class="tab-pane fade" id="housing-affordability-delta" role="tabpanel">
+                    <div style="text-align:center; font-size:16px; color:black;">Housing Budget Affordability Delta</div>
+                    <div id="housing-affordability-delta-fig"></div>
+                    <script type="application/json" id="housing-affordability-delta-fig-data">{{ housing_affordability_delta_fig_json|safe }}</script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <a href="https://www.ocregister.com/2015/08/30/oc-faces-bifurcated-threat-inequality-and-insufficient-housing/" target="_blank">
+                <img src="/static/assets/housing_inequality.png" style="width:100%; display:block; margin:2px auto;">
+            </a>
+            <p>Source: <a href="https://www.ocregister.com/2015/08/30/oc-faces-bifurcated-threat-inequality-and-insufficient-housing/" target="_blank">The Orange County Register</a></p>
+        </div>
+        <div class="col-6 mt-4">
+            <h3>Structural Barriers to Homeownership and Wealth Accumulation</h3>
+            <h4>The 20% Down Payment Threshold</h4>
+            <p>A 20% down payment is conventionally required to avoid Private Mortgage Insurance (PMI), an additional cost that disproportionately burdens lower-income buyers. This upfront financial hurdle exacerbates wealth stratification, as those without intergenerational wealth or substantial savings are effectively excluded from the market or forced into costlier financing structures.</p>
+            <h4>The True Cost of Ownership and Intergenerational Disparities</h4>
+            <p>The Sankey diagram illustrates how interest payments, property taxes, and insurance compound over a 30-year mortgage, significantly inflating the total expenditure. This dynamic entrenches intergenerational inequality, as households that purchased homes in earlier decades (when prices were lower relative to income) benefit from equity accumulation, while newer entrants face diminished purchasing power due to stagnant wage growth and rising housing costs.</p>
+            <h4>Housing Budget Affordability Delta: A Metric of Economic Polarization</h4>
+            <p>The delta between monthly housing costs (mortgage + taxes + insurance) and the recommended 30% housing budget serves as a stark indicator of affordability erosion. As this gap widens, middle- and working-class households are forced to allocate a larger share of income to housing, reducing disposable income for savings, education, or investment—key drivers of upward mobility.</p>
+        </div>
+        <div class="col-3">
+            <a href="https://www.seattletimes.com/opinion/maybe-income-inequality-is-all-about-housing/" target="_blank">
+                <img src="/static/assets/housing_rising_cost.png" style="width:70%; display:block; margin:2px auto;">
+            </a>
+            <p>Source: <a href="https://www.seattletimes.com/opinion/maybe-income-inequality-is-all-about-housing/" target="_blank">The Seattle Times</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

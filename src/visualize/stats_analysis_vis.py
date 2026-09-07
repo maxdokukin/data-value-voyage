@@ -3,13 +3,57 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
-import src.fetch.from_gcloud as gamma_resampling_df
 import plotly.figure_factory as ff
-import dash_bootstrap_components as dbc
-from dash import dcc
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_dir = os.path.join(BASE_DIR,'..','..', 'data', 'csv')
+
+
+def build_lorenz_curve_fig(selected_year):
+    csv_path = os.path.join(csv_dir, 'gamma_resampling.csv')
+    df = pd.read_csv(csv_path)
+    incomes = df[df["Year"] == selected_year]["Income Sample"].sort_values().values
+
+    if len(incomes) == 0:
+        return px.line(title="No data available for selected year.")
+
+    cumulative_income = np.cumsum(incomes)
+    cumulative_income = np.insert(cumulative_income, 0, 0)
+    cumulative_income = cumulative_income / cumulative_income[-1]
+    population_share = np.linspace(0, 1, len(cumulative_income))
+
+    equality_x = [0, 1]
+    equality_y = [0, 1]
+    fill_x = list(population_share) + equality_x[::-1]
+    fill_y = list(cumulative_income) + equality_y[::-1]
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=fill_x, y=fill_y, fill="toself", fillcolor="rgba(255, 0, 0, 0.2)",
+                             line=dict(color="rgba(255,255,255,0)"), hoverinfo="skip", showlegend=False))
+    fig.add_trace(go.Scatter(x=population_share.tolist(), y=cumulative_income.tolist(), mode="lines", name="Lorenz Curve",
+                             line=dict(color="blue", width=2)))
+    fig.add_trace(go.Scatter(x=equality_x, y=equality_y, mode="lines", name="Line of Equality",
+                             line=dict(dash="dash", color="gray")))
+
+    gini = 1 - 2 * np.trapezoid(cumulative_income, population_share)
+
+    fig.update_layout(
+        title=f"Lorenz Curve - {selected_year} — Gini Coefficient: {gini:.4f}",
+        xaxis_title="Cumulative Population",
+        yaxis_title="Cumulative Income",
+        xaxis=dict(range=[0, 1]),
+        yaxis=dict(range=[0, 1]),
+        showlegend=True,
+        hovermode="x",
+    )
+
+    return fig
+
+
+def gamma_resampling_years():
+    csv_path = os.path.join(csv_dir, 'gamma_resampling.csv')
+    df = pd.read_csv(csv_path)
+    return sorted(df["Year"].unique())
 
 
 def build_income_distribution_pyramid():
@@ -214,20 +258,6 @@ def income_distplot_2010():
 
 def income_distplot_2020():
     return build_income_distplot(2020)
-
-def income_distplot_tabs():
-    return dbc.Tabs([
-    dbc.Tab(dcc.Graph(figure=income_distplot_1940()), label="1940"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_1950()), label="1950"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_1960()), label="1960"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_1970()), label="1970"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_1980()), label="1980"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_1990()), label="1990"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_2000()), label="2000"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_2010()), label="2010"),
-    dbc.Tab(dcc.Graph(figure=income_distplot_2020()), label="2020"),
-])
-
 
 def multiyear_lorenz_curve():
     csv_path = os.path.join(csv_dir, 'gamma_resampling.csv')

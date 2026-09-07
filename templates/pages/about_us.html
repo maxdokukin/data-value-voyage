@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as macros %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/about-us-styles.css">
+{% endblock %}
+{% block content %}
+<div>
+    {{ macros.topbar(current_path="/about-us", overlay=False) }}
+
+    <div class="container-about-us">
+        {% include "partials/profiles.html" %}
+
+        <div class="repository-link">
+            <a href="https://github.com/ryanfernald/Value-Voyage" target="_blank" class="repository-link__text mt-4">View Our GitHub Repository</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

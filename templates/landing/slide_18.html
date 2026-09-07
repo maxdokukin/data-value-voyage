@@ -1,0 +1,11 @@
+{% import "partials/macros.html" as macros %}
+<div class="section-slide">
+    {{ macros.topbar(show_home=True, overlay=True) }}
+    <div class="hero">
+        <div class="overlay">
+            <div class="overlay-content">
+                {% include "partials/profiles.html" %}
+            </div>
+        </div>
+    </div>
+</div>

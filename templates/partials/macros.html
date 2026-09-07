@@ -1,0 +1,44 @@
+{% macro topbar(current_path='/', show_home=True, overlay=True) %}
+<div>
+    <link rel="stylesheet" href="/static/css/top-bar-styles.css">
+    <div id="topBar" class="top-bar with-background {{ 'fixed' if overlay else 'static' }}">
+        <div class="side-block">
+            {% if show_home %}
+            <a href="/"><img src="/static/assets/home_icon.png" alt="Home" class="icon-home"></a>
+            {% endif %}
+        </div>
+        <div id="topNav" class="top-nav open">
+            <a href="/objectives" class="{{ 'active' if current_path == '/objectives' else '' }}">Objectives</a>
+
+            <div class="dropdown" tabindex="0">
+                <span class="dropbtn {{ 'active' if current_path.startswith('/methods') else '' }}">Methods &#9662;</span>
+                <div class="dropdown-content">
+                    <a href="/methods/quantity-affordable" class="{{ 'active' if current_path == '/methods/quantity-affordable' else '' }}">Quantity Affordable</a>
+                    <a href="/methods/gini" class="{{ 'active' if current_path == '/methods/gini' else '' }}">Gini Income Inequality</a>
+                    <a href="/methods/housing" class="{{ 'active' if current_path == '/methods/housing' else '' }}">Housing Inequality</a>
+                </div>
+            </div>
+
+            <a href="/findings" class="{{ 'active' if current_path == '/findings' else '' }}">Findings</a>
+
+            {% set more_active = current_path.startswith('/eda') or current_path.startswith('/data-sources') or current_path.startswith('/about-us') %}
+            <div class="dropdown" tabindex="0">
+                <span class="dropbtn {{ 'active' if more_active else '' }}">More &#9662;</span>
+                <div class="dropdown-content">
+                    <a href="https://github.com/ryanfernald/Value-Voyage">GitHub Repo</a>
+                    <a href="/eda" class="{{ 'active' if current_path == '/eda' else '' }}">Explore Data</a>
+                    <a href="/data-sources" class="{{ 'active' if current_path == '/data-sources' else '' }}">Data Sources</a>
+                    <a href="/about-us" class="{{ 'active' if current_path == '/about-us' else '' }}">About Us</a>
+                </div>
+            </div>
+        </div>
+        <button id="menuToggle" class="menu-toggle" type="button" aria-label="Toggle navigation" onclick="toggleTopNav()">&#9776;</button>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro button(label, link, color='#007bff', width=None, height=None) %}
+<a href="{{ link }}" style="position:absolute; top:20px; right:20px; text-decoration:none;">
+    <button style="background-color:{{ color }}; color:white; font-weight:bold; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;{% if width %} width:{{ width }}px;{% endif %}{% if height %} height:{{ height }}px;{% endif %}">{{ label }}</button>
+</a>
+{% endmacro %}

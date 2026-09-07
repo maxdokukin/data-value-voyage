@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as macros %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/objective-styles.css">
+{% endblock %}
+{% block content %}
+<div class="container-objectives">
+    {{ macros.topbar(current_path="/objectives", overlay=False) }}
+
+    <div class="section">
+        <h2 class="section__title">Primary Objective</h2>
+        <p class="section__description">
+            Transform CPI and purchasing-power data into quantities of everyday goods and
+            calculate how many units an average consumer could buy per month,
+            across decades from 1900 to 2020 (10-year intervals).
+        </p>
+        <ul class="objective-list">
+            <li>Convert CPI indices into quantities of goods (milk, eggs, sugar, etc.)</li>
+            <li>Model average monthly purchasing power for each decade</li>
+            <li>Visualize trends in a clear, user-friendly format</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section__title">Secondary Objectives</h2>
+        <ul class="objective-list">
+            <li>Analyze generational income data and affordability shifts</li>
+            <li>Identify historical periods of relative economic prosperity</li>
+            <li>Experiment with ML-based forecasting of future price trends</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section__title">Broader Impact</h2>
+        <p class="section__description">
+            Offer an accessible dashboard that demystifies inflation and purchasing power,
+            helping non-expert users grasp the real-world impact of price changes.
+        </p>
+    </div>
+</div>
+{% endblock %}

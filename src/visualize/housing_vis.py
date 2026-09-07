@@ -92,7 +92,7 @@ def housing_sankey(selected_year):
     )])
 
     fig.update_layout(
-        title_text=f"{selected_year} Home: ${round(price):,.0f} @ {round(rate * 100, 1)}%\nTotal 30-Year Cost: ${round(total_cost):,.0f}",
+        title_text=f"{selected_year} Home: &#36;{round(price):,.0f} @ {round(rate * 100, 1)}%\nTotal 30-Year Cost: &#36;{round(total_cost):,.0f}",
         font_size=14
     )
 

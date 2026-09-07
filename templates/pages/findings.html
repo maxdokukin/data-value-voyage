@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as macros %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/findings-styles.css">
+{% endblock %}
+{% block content %}
+<div class="container-findings">
+    {{ macros.topbar(current_path="/findings", overlay=False) }}
+
+    <div class="section">
+        <div class="section-header d-flex align-items-center justify-content-between">
+            <h3>Purchasing Power Findings</h3>
+            <a href="/methods/quantity-affordable" class="btn btn-secondary btn-sm">View Method</a>
+        </div>
+        <p>By dividing average monthly income by CPI-based prices for a basket of goods, we measured how many units an average consumer could afford per month. Comparing the 1920s to the 2020s shows declines across all items.</p>
+        <p>Flour and sugar affordability dropped by over 90%, eggs fell ~13%, pork chops and bacon by ~40-45%, milk by ~57%, and butter became effectively unaffordable.</p>
+        <div class="table-container">
+            <div class="row mb-5">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                {% for col in comparison_records[0].keys() %}
+                                <th>{{ col }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in comparison_records %}
+                            <tr>
+                                {% for value in row.values() %}
+                                <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header d-flex align-items-center justify-content-between">
+            <h3>Income Inequality Findings</h3>
+            <a href="/methods/gini" class="btn btn-secondary btn-sm">View Method</a>
+        </div>
+        <p>Using Lorenz curves and Gini coefficients, income distribution was quantified from 1900 to 2020. The Gini rose from ~0.45 to &gt;0.49, indicating growing inequality.</p>
+        <p>Normalized metrics (Palma Ratio, Housing Delta, Productivity Gap) served as alpha/beta parameters in a Gamma distribution, revealing increasing skew and dispersion over time.</p>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div id="gini-trend"></div>
+                <script type="application/json" id="gini-trend-data">{{ gini_trend_fig_json|safe }}</script>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header d-flex align-items-center justify-content-between">
+            <h3>Housing Affordability Findings</h3>
+            <a href="/methods/housing" class="btn btn-secondary btn-sm">View Method</a>
+        </div>
+        <p>Our housing analysis combined Sankey diagrams, budget trend charts, and affordability delta metrics to assess structural barriers in homeownership.</p>
+        <p>A 20% down payment requirement and cumulative costs (interest, taxes, insurance) disproportionately exclude lower-income households. The gap between actual housing expenditures and the recommended 30% budget has widened, straining disposable income.</p>
+        <div class="row">
+            <div class="col-6">
+                <div id="findings-housing-sankey"></div>
+                <script type="application/json" id="findings-housing-sankey-data">{{ housing_sankey_fig_json|safe }}</script>
+            </div>
+            <div class="col-6">
+                <div id="findings-housing-budget-trend"></div>
+                <script type="application/json" id="findings-housing-budget-trend-data">{{ housing_budget_trend_fig_json|safe }}</script>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

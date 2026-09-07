@@ -1,0 +1,28 @@
+<div class="section-slide">
+    <div class="container-fluid mt-1">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#slide13-presidents" type="button" role="tab">Presidents</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#slide13-wartime" type="button" role="tab">Wartime</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#slide13-recessions" type="button" role="tab">Recessions</button></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="slide13-presidents" role="tabpanel">
+                        <div id="slide13-presidents-fig"></div>
+                        <script type="application/json" id="slide13-presidents-fig-data">{{ presidents_fig_json|safe }}</script>
+                    </div>
+                    <div class="tab-pane fade" id="slide13-wartime" role="tabpanel">
+                        <div id="slide13-wartime-fig"></div>
+                        <script type="application/json" id="slide13-wartime-fig-data">{{ wartime_fig_json|safe }}</script>
+                    </div>
+                    <div class="tab-pane fade" id="slide13-recessions" role="tabpanel">
+                        <div id="slide13-recessions-fig"></div>
+                        <script type="application/json" id="slide13-recessions-fig-data">{{ recessions_fig_json|safe }}</script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

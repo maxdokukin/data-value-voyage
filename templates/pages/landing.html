@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/global-styles.css">
+<link rel="stylesheet" href="/static/css/homepage-styles.css">
+{% endblock %}
+{% block content %}
+<div class="container-slide">
+    {% for n in range(1, 19) %}
+    {% include "landing/slide_" ~ n ~ ".html" %}
+    {% endfor %}
+</div>
+{% endblock %}

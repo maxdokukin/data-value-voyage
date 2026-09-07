@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as macros %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/css/methods-styles.css">
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    {{ macros.topbar(current_path="/methods/quantity-affordable", overlay=False) }}
+
+    <div class="section">
+        <h2 class="section__title">Quantifying Purchasing Power via CPI-to-Good Conversion</h2>
+        <p class="section__description">
+            This page details how we transformed CPI indices into tangible units of everyday goods
+            and computed the number of units an average consumer could afford each month
+            from 1900 to 2020 (10-year intervals).
+        </p>
+    </div>
+
+    <div class="section">
+        <h3 class="section__title">Goods Price Trends</h3>
+        <p class="section__description">CPI-based prices for a basket of goods, shown in 10-year snapshots.</p>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div id="goods-price-trends"></div>
+                <script type="application/json" id="goods-price-trends-data">{{ goods_prices_fig_json|safe }}</script>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section__title">Income Trends</h3>
+        <p class="section__description">Average monthly incomes from IRS, BEA, and FRED, plotted on a log scale.</p>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div id="income-trends"></div>
+                <script type="application/json" id="income-trends-data">{{ compare_income_fig_json|safe }}</script>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section__title">Calculating Quantity Affordable</h3>
+        <p class="section__description">
+            \[
+            \text{quantity\_affordable}_{\text{year}}
+            = \frac{\text{average\_monthly\_income}_{\text{year}}}{\text{good\_price}_{\text{year}}}
+            \]
+        </p>
+    </div>
+
+    <div class="section">
+        <h3 class="section__title">Quantity Affordable Trends</h3>
+        <p class="section__description">How many units of each good an average earner could buy per month, 1900-2020.</p>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div id="quantity-affordable-trends"></div>
+                <script type="application/json" id="quantity-affordable-trends-data">{{ quantity_affordable_fig_json|safe }}</script>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3 class="section__title">1920s vs 2020s Affordability Comparison</h3>
+        <p class="section__description">Average monthly units affordable in the 1920s compared to the 2020s, with % change.</p>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            {% for col in comparison_records[0].keys() %}
+                            <th>{{ col }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in comparison_records %}
+                        <tr>
+                            {% for value in row.values() %}
+                            <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

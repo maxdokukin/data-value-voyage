@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% import "partials/macros.html" as macros %}
+{% block content %}
+<div class="container-fluid">
+    {{ macros.topbar(current_path="/eda", overlay=False) }}
+
+    <div class="row mt-4">
+        <div class="col-1"></div>
+        <div class="col-10 mb-4 mt-2">
+            <h2>Price Change From Decade to Decade for Various Goods</h2>
+            <h4>Each cell of the heatmap shows the change in price from one decade to the next.</h4>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#price-change-percent" type="button" role="tab">Percent Change</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#price-change-dollar" type="button" role="tab">Dollar Change</button></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="price-change-percent" role="tabpanel">
+                    <div style="text-align:center; font-size:16px; color:black;">Percent Value Changes for Goods by Decade</div>
+                    <div id="price-change-percent-fig"></div>
+                    <script type="application/json" id="price-change-percent-fig-data">{{ price_change_percent_fig_json|safe }}</script>
+                </div>
+                <div class="tab-pane fade" id="price-change-dollar" role="tabpanel">
+                    <div style="text-align:center; font-size:16px; color:black;">Dollar Value Changes for Goods by Decade</div>
+                    <div id="price-change-dollar-fig"></div>
+                    <script type="application/json" id="price-change-dollar-fig-data">{{ price_change_dollar_fig_json|safe }}</script>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row mb-4 mt-3">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <h2>Gini Coefficient Analysis About US Presidents, Wartime Events, and Major Economic Recessions.</h2>
+            <h3>The Gini Coefficient is a measure of income inequality within a population, but it is also a lagging indicator, meaning it reflects past events rather than current conditions.</h3>
+            <ul>
+                <li>The US Presidents don't seem to have a significant impact on the Gini Coefficient, there is no notable trend between Republic (red blocks) and Democrat (blue blocks) presidents.</li>
+                <li>The Wartime events seem to have a more obvious impact on the Gini Coefficient, especially around WWII, The Korean War and the Vietnam War.</li>
+                <li class="mb-4">Major Economic Recessions don't seem to have a significant impact on the Gini Coefficnent.</li>
+            </ul>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#eda-gini-presidents" type="button" role="tab">Presidents</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#eda-gini-wartime" type="button" role="tab">Wartime</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#eda-gini-recessions" type="button" role="tab">Recessions</button></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="eda-gini-presidents" role="tabpanel">
+                    <div id="eda-gini-presidents-fig"></div>
+                    <script type="application/json" id="eda-gini-presidents-fig-data">{{ presidents_fig_json|safe }}</script>
+                </div>
+                <div class="tab-pane fade" id="eda-gini-wartime" role="tabpanel">
+                    <div id="eda-gini-wartime-fig"></div>
+                    <script type="application/json" id="eda-gini-wartime-fig-data">{{ wartime_fig_json|safe }}</script>
+                </div>
+                <div class="tab-pane fade" id="eda-gini-recessions" role="tabpanel">
+                    <div id="eda-gini-recessions-fig"></div>
+                    <script type="application/json" id="eda-gini-recessions-fig-data">{{ recessions_fig_json|safe }}</script>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <h2>Price Trends Over Time</h2>
+            <p>Double Click on the Legend on a specific Good to isolate it.</p>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div id="price-trends-graph"></div>
+            <script type="application/json" id="price-trends-graph-data">{{ price_trends_fig_json|safe }}</script>
+        </div>
+        <div class="col-6">
+            <div id="price-trends-graph-after-1970"></div>
+            <script type="application/json" id="price-trends-graph-after-1970-data">{{ price_trends_after_1970_fig_json|safe }}</script>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <h2>Affordable Quantity of Goods over a Century</h2>
+            <p>Affordable Quantity is the Monthly Income Divited by the price of Goods. So when income increases and the price of goods stays relatively the same, the affordable quantity goes up.</p>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div id="affordable-goods-graph"></div>
+            <script type="application/json" id="affordable-goods-graph-data">{{ affordable_goods_fig_json|safe }}</script>
+        </div>
+        <div class="col-6">
+            <div id="affordable-goods-graph-noflower-nosugar"></div>
+            <script type="application/json" id="affordable-goods-graph-noflower-nosugar-data">{{ affordable_goods_no_flower_sugar_fig_json|safe }}</script>
+        </div>
+    </div>
+</div>
+{% endblock %}

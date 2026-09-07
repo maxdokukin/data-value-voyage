@@ -1,16 +1,16 @@
-from dash import dcc, html, Input, Output, callback
-import dash_bootstrap_components as dbc
 import os
 import pandas as pd
 import plotly.graph_objects as go
-from src.fetch.from_gcloud import goods_prices_df
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_dir = os.path.join(BASE_DIR, '..', '..', 'data', 'csv')
 
 
 #### Heatmap for Dollar Chagen #######
 
 def create_goods_price_change_heatmap_dollar_change():
 
-    df = goods_prices_df
+    df = pd.read_csv(os.path.join(csv_dir, 'goods_prices.csv'))
 
     df['date'] = pd.to_datetime(df['date'])
     df['year'] = df['date'].dt.year
@@ -70,7 +70,7 @@ def create_goods_price_change_heatmap_dollar_change():
 
 def create_goods_price_change_heatmap_percent_change():
 
-    df = goods_prices_df
+    df = pd.read_csv(os.path.join(csv_dir, 'goods_prices.csv'))
 
     df['date'] = pd.to_datetime(df['date'])
     df['year'] = df['date'].dt.year
@@ -127,36 +127,3 @@ def create_goods_price_change_heatmap_percent_change():
     )
 
     return fig
-
-
-####### Price Change Tabs #########
-
-def price_change_tabs():
-    return dbc.Tabs(
-        [
-            dbc.Tab(
-                children=[
-                    html.Div(
-                        "Percent Value Changes for Goods by Decade",
-                        style={"text-align": "center", "font-size": "16px", "color": "black"}
-                    ),
-                    dcc.Graph(figure=create_goods_price_change_heatmap_percent_change())
-                ],
-                tab_id="create_goods_price_change_heatmap_percent_change",
-                label="Percent Change"
-            ),
-            dbc.Tab(
-                children=[
-                    html.Div(
-                        "Dollar Value Changes for Goods by Decade",
-                        style={"text-align": "center", "font-size": "16px", "color": "black"}
-                    ),
-                    dcc.Graph(figure=create_goods_price_change_heatmap_dollar_change())
-                ],
-                tab_id="create_goods_price_change_heatmap_dollar_change",
-                label="Dollar Change"
-            ),
-        ],
-        id="price-change-tabs",
-        active_tab="create_goods_price_change_heatmap_percent_change"
-    )

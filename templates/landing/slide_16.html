@@ -1,0 +1,13 @@
+{% import "partials/macros.html" as macros %}
+<div class="section-slide">
+    <div class="container-fluid mt-1">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <div id="housing-budget-trend"></div>
+                <script type="application/json" id="housing-budget-trend-data">{{ housing_budget_trend_fig_json|safe }}</script>
+            </div>
+        </div>
+    </div>
+    {{ macros.button(label="Learn More about this Method", link="/methods/housing", color="#693382", width=300, height=50) }}
+</div>
