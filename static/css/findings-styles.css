@@ -2,11 +2,13 @@
   padding: 30px;
   background: whitesmoke;
   border-radius: 30px;
+  color: #222;
 }
 
 .section__title {
   font-size: 1.4rem;
   margin: 0 0 0.5rem;
+  color: #222;
 }
 
 .section__description {
@@ -19,6 +21,7 @@
   list-style: disc inside;
   margin: 0;
   padding: 0;
+  color: #444;
 }
 
 .objective-list li {
